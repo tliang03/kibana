@@ -1,3 +1,5 @@
+$dis-sidebar-min-width: 275px;
+
 // SASSTODO: replace the margin-top value with a variable
 .dscSidebar__listHeader {
   margin-top: 5px;
@@ -198,5 +200,56 @@
     right: $euiSize;
     width: auto;
     height: auto;
+  }
+}
+
+.dscContainer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  flex-direction: row;
+  position: relative;
+
+  #discover-sidebar {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    position: relative;
+    width: auto;
+    min-width: $dis-sidebar-min-width;
+    max-width: 75%;
+
+    .dscFieldChooserContainer {
+      -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+    }
+
+
+    &.closed {
+      min-width: 0 !important
+    }
+  }
+
+  .dscWrapper {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 1px;
+    -ms-flex: 1 1 1px;
+    flex: 1 1 1px;
   }
 }

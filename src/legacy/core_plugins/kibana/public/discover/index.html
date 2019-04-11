@@ -45,10 +45,10 @@
         index-patterns="[indexPattern]"
       ></filter-bar>
     </div>
-    <div class="row">
+    <div class="row dscContainer">
       <div class="col-md-2 sidebar-container collapsible-sidebar" id="discover-sidebar">
         <disc-field-chooser
-          class="dscFieldChooser"
+          class="dscFieldChooser dscFieldChooserContainer"
           columns="state.columns"
           hits="rows"
           field-counts="fieldCounts"
@@ -60,6 +60,10 @@
           on-remove-field="removeColumn"
         >
         </disc-field-chooser>
+        <panel-resizer
+          app-name="'discover'"
+          panel-el="'#discover-sidebar'"
+        />
       </div>
 
       <div class="dscWrapper col-md-10">

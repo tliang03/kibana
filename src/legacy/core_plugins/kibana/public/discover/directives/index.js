@@ -31,6 +31,10 @@ import {
 
 import './timechart';
 
+import {
+  KuiPanelResizer
+} from '@kbn/ui-framework/components';
+
 const app = uiModules.get('apps/discover', ['react']);
 
 app.directive('discoverNoResults', reactDirective => reactDirective(injectI18nProvider(DiscoverNoResults)));
@@ -39,3 +43,5 @@ app.directive(
   'discoverUnsupportedIndexPattern',
   reactDirective => reactDirective(injectI18nProvider(DiscoverUnsupportedIndexPattern), ['unsupportedType'])
 );
+
+app.directive('panelResizer', reactDirective => reactDirective(injectI18nProvider(KuiPanelResizer)));

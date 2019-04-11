@@ -134,3 +134,7 @@ export {
   KuiToolBarFooterSection,
   KuiToolBarText
 } from './tool_bar';
+
+export {
+  KuiPanelResizer
+} from './panel_resizer';
