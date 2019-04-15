@@ -26,6 +26,10 @@ import {
   EuiTitle,
 } from '@elastic/eui';
 
+import {
+  CopyQuery
+} from 'ui/copy_query';
+
 import { InspectorViewChooser } from './inspector_view_chooser';
 
 function hasAdaptersChanged(oldAdapters, newAdapters) {
@@ -97,6 +101,13 @@ class InspectorPanel extends Component {
                 selectedView={selectedView}
               />
             </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <CopyQuery
+                adapters={this.props.adapters}
+                columns={this.props.columns}
+              />
+            </EuiFlexItem>
+
           </EuiFlexGroup>
         </EuiFlyoutHeader>
         { this.renderSelectedPanel() }
@@ -119,6 +130,7 @@ InspectorPanel.propTypes = {
     }
   },
   title: PropTypes.string,
+  columns: PropTypes.arrayOf(PropTypes.string)
 };
 
 export { InspectorPanel };
