@@ -292,7 +292,8 @@ function discoverController(
     testId: 'openInspectorButton',
     run() {
       Inspector.open(inspectorAdapters, {
-        title: savedSearch.title
+        title: savedSearch.title,
+        columns: $scope.state.columns
       });
     }
   }];
