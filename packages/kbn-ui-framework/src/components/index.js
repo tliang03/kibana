@@ -138,3 +138,7 @@ export {
 export {
   KuiPanelResizer
 } from './panel_resizer';
+
+export {
+  KuiStickyHeader
+} from './sticky_header';

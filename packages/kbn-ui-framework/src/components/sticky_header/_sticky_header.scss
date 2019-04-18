@@ -1,0 +1,24 @@
+.kuiStickyHeader {
+  position: fixed;
+  top: -52px;
+  background: #F5F7FA;
+  z-index: 5;
+  box-shadow: 2px 2px 2px grey;
+  transition: 0.1s;
+  color: #006BB4;
+  font-weight: bold;
+  font-size: 12px;
+  overflow-x: auto;
+
+  .kuiStickyHeader__table {
+    width: 100%;
+    max-width: inherit !important;
+    display:block;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  &.visible {
+    top: 0;
+  }
+}

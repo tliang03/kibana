@@ -214,6 +214,7 @@ discover-app {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  z-index: 2;
 
   flex-direction: row;
   position: relative;

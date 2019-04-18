@@ -103,6 +103,17 @@
       ></tr>
     </tbody>
   </table>
+  <sticky-header
+    header-el="'[kbn-table-header]'"
+    group-name="'doc_table'"
+    columns="columns"
+    index-pattern="indexPattern"
+    sort-order="sorting"
+    on-change-sort-order="onChangeSortOrder"
+    on-move-column="onMoveColumn"
+    on-remove-column="onRemoveColumn"
+  />
+
   <kbn-infinite-scroll ng-if="infiniteScroll" more="addRows"></kbn-infinite-scroll>
 </div>
 

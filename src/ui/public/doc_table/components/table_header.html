@@ -1,9 +1,10 @@
 <tr>
-  <td width="1%"></td>
+  <th width="1%" data-name="Expander"></th>
   <th
     ng-if="indexPattern.timeFieldName && !hideTimeColumn"
     data-test-subj="docTableHeaderField"
     scope="col"
+    data-name="{{indexPattern.timeFieldName}}"
   >
     <span>
       <span
@@ -25,6 +26,7 @@
     ng-repeat="name in columns"
     data-test-subj="docTableHeaderField"
     scope="col"
+    data-name="{{name}}"
   >
     <span
       data-test-subj="docTableHeader-{{name}}"
