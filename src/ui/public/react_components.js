@@ -21,6 +21,7 @@ import 'ngreact';
 
 import {
   KuiToolBarSearchBox,
+  KuiStickyHeader
 } from '@kbn/ui-framework/components';
 
 import {
@@ -36,6 +37,8 @@ import { uiModules } from './modules';
 const app = uiModules.get('app/kibana', ['react']);
 
 app.directive('toolBarSearchBox', reactDirective => reactDirective(KuiToolBarSearchBox));
+
+app.directive('stickyHeader', reactDirective => reactDirective(KuiStickyHeader));
 
 app.directive('confirmModal', reactDirective => reactDirective(EuiConfirmModal));
 

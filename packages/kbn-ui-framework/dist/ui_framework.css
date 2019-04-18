@@ -3166,3 +3166,25 @@ main {
   -ms-flex-align: center;
   align-items: center;
   height: 100%; }
+
+.kuiStickyHeader {
+  position: fixed;
+  top: -52px;
+  background: #F5F7FA;
+  z-index: 5;
+  -webkit-box-shadow: 2px 2px 2px grey;
+          box-shadow: 2px 2px 2px grey;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  color: #006BB4;
+  font-weight: bold;
+  font-size: 12px;
+  overflow-x: auto; }
+  .kuiStickyHeader .kuiStickyHeader__table {
+    width: 100%;
+    max-width: inherit !important;
+    display: block;
+    overflow: hidden;
+    margin-bottom: 0; }
+  .kuiStickyHeader.visible {
+    top: 0; }
