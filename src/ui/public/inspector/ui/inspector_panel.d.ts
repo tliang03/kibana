@@ -23,6 +23,7 @@ import { Adapters, InspectorViewDescription } from '../types';
 interface InspectorPanelProps {
   adapters: Adapters;
   title?: string;
+  columns?: any;
   views: InspectorViewDescription[];
 }
 

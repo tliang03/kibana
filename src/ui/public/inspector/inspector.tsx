@@ -47,6 +47,7 @@ function isAvailable(adapters?: Adapters): boolean {
  */
 interface InspectorOptions {
   title?: string;
+  columns?: any;
 }
 
 export type InspectorSession = FlyoutSession;
