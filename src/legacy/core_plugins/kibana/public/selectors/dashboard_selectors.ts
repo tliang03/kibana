@@ -17,7 +17,7 @@
  * under the License.
  */
 
-import { Filters, Query, TimeRange } from 'ui/embeddable';
+import { Filters, Query, TimeRange, DateInterval } from 'ui/embeddable';
 import { DashboardViewMode } from '../dashboard/dashboard_view_mode';
 import * as DashboardSelectors from '../dashboard/selectors';
 import { PanelId } from '../dashboard/selectors/types';
@@ -64,6 +64,8 @@ export const getFilters = (state: CoreKibanaState): Filters =>
   DashboardSelectors.getFilters(getDashboard(state));
 export const getQuery = (state: CoreKibanaState): Query =>
   DashboardSelectors.getQuery(getDashboard(state));
+export const getDateInterval = (state: CoreKibanaState): DateInterval =>
+  DashboardSelectors.getDateInterval(getDashboard(state));
 
 export const getTitle = (state: CoreKibanaState): string =>
   DashboardSelectors.getTitle(getDashboard(state));

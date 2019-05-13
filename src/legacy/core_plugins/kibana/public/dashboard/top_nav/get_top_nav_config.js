@@ -29,7 +29,7 @@ import { TopNavIds } from './top_nav_ids';
  * @return {Array<kbnTopNavConfig>} - Returns an array of objects for a top nav configuration, based on the
  * mode.
  */
-export function getTopNavConfig(dashboardMode, actions, hideWriteControls) {
+export function getTopNavConfig(dashboardMode, actions, hideWriteControls, model) {
   switch (dashboardMode) {
     case DashboardViewMode.VIEW:
       return (
@@ -41,7 +41,8 @@ export function getTopNavConfig(dashboardMode, actions, hideWriteControls) {
             getFullScreenConfig(actions[TopNavIds.FULL_SCREEN]),
             getShareConfig(actions[TopNavIds.SHARE]),
             getCloneConfig(actions[TopNavIds.CLONE]),
-            getEditConfig(actions[TopNavIds.ENTER_EDIT_MODE])
+            getEditConfig(actions[TopNavIds.ENTER_EDIT_MODE]),
+            getDateInterval(actions[TopNavIds.DATE_INTERVAL], model)
           ]
       );
     case DashboardViewMode.EDIT:
@@ -50,7 +51,8 @@ export function getTopNavConfig(dashboardMode, actions, hideWriteControls) {
         getViewConfig(actions[TopNavIds.EXIT_EDIT_MODE]),
         getAddConfig(actions[TopNavIds.ADD]),
         getOptionsConfig(actions[TopNavIds.OPTIONS]),
-        getShareConfig(actions[TopNavIds.SHARE])];
+        getShareConfig(actions[TopNavIds.SHARE]),
+        getDateInterval(actions[TopNavIds.DATE_INTERVAL], model)];
     default:
       return [];
   }
@@ -178,5 +180,16 @@ function getOptionsConfig(action) {
     }),
     testId: 'dashboardOptionsButton',
     run: action,
+  };
+}
+
+function getDateInterval(action, model) {
+  return {
+    key: 'dateInterval',
+    label: i18n.translate('kbn.dashboard.topNave.optionsConfigDescription', {
+      defaultMessage: '{value}',
+      values: { value: model.dateInterval && model.dateInterval.display },
+    }),
+    template: '<date-interval-picker select-value="model.dateInterval" on-change="updateDateInterval" />'
   };
 }

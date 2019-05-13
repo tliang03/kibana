@@ -20,7 +20,7 @@
 import _ from 'lodash';
 import { ContainerState, Embeddable } from 'ui/embeddable';
 import { OnEmbeddableStateChanged } from 'ui/embeddable/embeddable_factory';
-import { Filters, Query, TimeRange } from 'ui/embeddable/types';
+import { Filters, Query, TimeRange, DateInterval } from 'ui/embeddable/types';
 import { PersistedState } from 'ui/persisted_state';
 import { VisualizeLoader } from 'ui/visualize/loader';
 import { EmbeddedVisualizeHandler } from 'ui/visualize/loader/embedded_visualize_handler';
@@ -48,6 +48,7 @@ export class VisualizeEmbeddable extends Embeddable {
   private timeRange?: TimeRange;
   private query?: Query;
   private filters?: Filters;
+  private dateInterval?: DateInterval;
 
   constructor({
     onEmbeddableStateChanged,
@@ -129,6 +130,12 @@ export class VisualizeEmbeddable extends Embeddable {
       this.query = containerState.query;
     }
 
+    // Check if dateInterval has changed
+    if (containerState.dateInterval !== this.dateInterval) {
+      updatedParams.dateInterval = containerState.dateInterval;
+      this.dateInterval = containerState.dateInterval;
+    }
+
     const derivedPanelTitle = this.getPanelTitle(containerState);
     if (this.panelTitle !== derivedPanelTitle) {
       updatedParams.dataAttrs = {
@@ -152,6 +159,7 @@ export class VisualizeEmbeddable extends Embeddable {
     this.timeRange = containerState.timeRange;
     this.query = containerState.query;
     this.filters = containerState.filters;
+    this.dateInterval = containerState.dateInterval;
 
     this.transferCustomizationsToUiState(containerState);
 
@@ -170,6 +178,7 @@ export class VisualizeEmbeddable extends Embeddable {
       timeRange: containerState.timeRange,
       query: containerState.query,
       filters: containerState.filters,
+      dateInterval: containerState.dateInterval,
       cssClass: `panel-content panel-content--fullWidth`,
       dataAttrs,
     };

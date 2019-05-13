@@ -1013,5 +1013,15 @@ export function getUiSettingDefaults() {
       }),
       category: ['rollups'],
     },
+    'dateinterval:intervalDefaults': {
+      name: i18n.translate('kbn.advancedSettings.dateinterval.intervalDefaultsTitle', {
+        defaultMessage: 'Date interval picker defaults',
+      }),
+      value: '{ "display": "Auto", "value": "auto" }',
+      type: 'json',
+      description: i18n.translate('kbn.advancedSettings.dateinterval.intervalDefaultsText', {
+        defaultMessage: 'The date interval selection to use when Kibana is started without one',
+      }),
+    },
   };
 }

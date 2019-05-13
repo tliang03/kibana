@@ -142,6 +142,19 @@
       },
       "version": {
         "type": "integer"
+      },
+      "intervalRestore": {
+        "type": "boolean"
+      },
+      "dateInterval": {
+        "properties": {
+          "display": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "keyword"
+          }
+        }
       }
     }
   },

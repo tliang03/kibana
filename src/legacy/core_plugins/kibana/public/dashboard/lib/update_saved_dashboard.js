@@ -24,6 +24,7 @@ export function updateSavedDashboard(savedDashboard, appState, timeFilter, toJso
   savedDashboard.title = appState.title;
   savedDashboard.description = appState.description;
   savedDashboard.timeRestore = appState.timeRestore;
+  savedDashboard.intervalRestore = appState.intervalRestore;
   savedDashboard.panelsJSON = toJson(appState.panels);
   savedDashboard.optionsJSON = toJson(appState.options);
 
@@ -35,4 +36,6 @@ export function updateSavedDashboard(savedDashboard, appState, timeFilter, toJso
     : undefined;
   const timeRestoreObj = _.pick(timeFilter.getRefreshInterval(), ['display', 'pause', 'section', 'value']);
   savedDashboard.refreshInterval = savedDashboard.timeRestore ? timeRestoreObj : undefined;
+
+  savedDashboard.dateInterval = appState.dateInterval;
 }

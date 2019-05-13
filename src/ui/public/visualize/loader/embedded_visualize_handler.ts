@@ -34,7 +34,8 @@ import { VisualizeDataLoader } from './visualize_data_loader';
 
 import { DataAdapter, RequestAdapter } from '../../inspector/adapters';
 
-import { VisSavedObject, VisualizeLoaderParams, VisualizeUpdateParams } from './types';
+import { VisSavedObject, VisualizeLoaderParams, VisualizeUpdateParams, VisualizationAggParams,
+VisualizationParams } from './types';
 
 interface EmbeddedVisualizeHandlerParams extends VisualizeLoaderParams {
   Private: IPrivate;
@@ -102,6 +103,7 @@ export class EmbeddedVisualizeHandler {
       query,
       Private,
       autoFetch,
+      dateInterval
     } = params;
 
     this.dataLoaderParams = {
@@ -110,6 +112,7 @@ export class EmbeddedVisualizeHandler {
       query,
       queryFilter,
       filters,
+      dateInterval,
       uiState,
       aggs: vis.getAggConfig(),
       forceFetch: false,
@@ -163,6 +166,8 @@ export class EmbeddedVisualizeHandler {
     this.dataSubject = new Rx.Subject();
     this.data$ = this.dataSubject.asObservable().pipe(share());
 
+    this.updateDateInterval(dateInterval);
+
     this.render();
   }
 
@@ -200,9 +205,51 @@ export class EmbeddedVisualizeHandler {
       fetchRequired = true;
       this.dataLoaderParams.query = params.query;
     }
+    if (params.hasOwnProperty('dateInterval')) {
+      fetchRequired = true;
+      this.dataLoaderParams.dateInterval = params.dateInterval;
 
+      this.updateDateInterval(params.dateInterval);
+    }
     if (fetchRequired) {
       this.fetchAndRender();
+    }
+  }
+
+  /**
+   * Update date interval of the embedded visualization.
+   * @param params The parameters that should be updated.
+   */
+  private updateDateInterval(dateInterval: any = null) {
+    let intervalValue = dateInterval ? dateInterval.value: null;
+
+    if(intervalValue) {
+
+      if(intervalValue !== 'auto') {
+        intervalValue = '1' + intervalValue;
+      }
+
+      let visState = _.cloneDeep(this.vis.getState());
+      const aggs: VisualizationAggParams[] = _.get(visState, ['aggs']);
+      const params: VisualizationParams = _.get(visState, ['params']);
+
+      aggs.forEach((agg: VisualizationAggParams) => {
+        if(agg.type === 'date_histogram') {
+          agg.params.interval = intervalValue;
+        }
+        return agg;
+      });
+
+      visState.aggs = aggs;
+
+      if(params && params.interval ){
+        params.interval = intervalValue;
+      }
+
+      visState.params = params;
+
+      this.vis.setState(visState);
+      this.handleVisUpdate();
     }
   }
 

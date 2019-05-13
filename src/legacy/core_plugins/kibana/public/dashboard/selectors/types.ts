@@ -17,7 +17,7 @@
  * under the License.
  */
 
-import { EmbeddableMetadata, Filters, Query, TimeRange } from 'ui/embeddable';
+import { EmbeddableMetadata, Filters, Query, DateInterval, TimeRange } from 'ui/embeddable';
 import { DashboardViewMode } from '../dashboard_view_mode';
 
 export interface ViewState {
@@ -29,6 +29,7 @@ export interface ViewState {
   readonly hidePanelTitles: boolean;
   readonly useMargins: boolean;
   readonly query: Query;
+  readonly dateInterval: DateInterval;
   readonly filters: Filters;
 }
 

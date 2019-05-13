@@ -18,7 +18,7 @@
  */
 
 import _ from 'lodash';
-import { ContainerState, EmbeddableMetadata, Filters, Query, TimeRange } from 'ui/embeddable';
+import { ContainerState, EmbeddableMetadata, Filters, Query, TimeRange, DateInterval } from 'ui/embeddable';
 import { EmbeddableCustomization } from 'ui/embeddable/types';
 import { DashboardViewMode } from '../dashboard_view_mode';
 import {
@@ -112,6 +112,8 @@ export const getFilters = (dashboard: DashboardState): Filters => dashboard.view
 
 export const getQuery = (dashboard: DashboardState): Query => dashboard.view.query;
 
+export const getDateInterval = (dashboard: DashboardState): DateInterval => dashboard.view.dateInterval;
+
 export const getMetadata = (dashboard: DashboardState): DashboardMetadata => dashboard.metadata;
 
 export const getTitle = (dashboard: DashboardState): string => dashboard.metadata.title;
@@ -128,6 +130,7 @@ export const getContainerState = (dashboard: DashboardState, panelId: PanelId): 
     hidePanelTitles: getHidePanelTitles(dashboard),
     isPanelExpanded: getMaximizedPanelId(dashboard) === panelId,
     query: getQuery(dashboard),
+    dateInterval: getDateInterval(dashboard),
     timeRange: {
       from: time.from,
       to: time.to,

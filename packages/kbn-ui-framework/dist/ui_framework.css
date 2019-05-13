@@ -3188,3 +3188,37 @@ main {
     margin-bottom: 0; }
   .kuiStickyHeader.visible {
     top: 0; }
+
+.kuiDateIntervalWrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end; }
+  .kuiDateIntervalWrapper .kuiDateIntervalContent {
+    width: 100%;
+    max-width: 600px; }
+    .kuiDateIntervalWrapper .kuiDateIntervalContent .kuiDateIntervalTitle {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 18px;
+      color: #2D2D2D; }
+    .kuiDateIntervalWrapper .kuiDateIntervalContent .kuiDateIntervalMenu {
+      float: left;
+      padding: 0 15px; }
+      .kuiDateIntervalWrapper .kuiDateIntervalContent .kuiDateIntervalMenu .kuiDateIntervalSection {
+        float: left;
+        padding: 0 15px; }
+      .kuiDateIntervalWrapper .kuiDateIntervalContent .kuiDateIntervalMenu .uiUnstyled {
+        padding-left: 0;
+        list-style: none; }
+        .kuiDateIntervalWrapper .kuiDateIntervalContent .kuiDateIntervalMenu .uiUnstyled li.selected {
+          background-color: #006BB4;
+          color: #ffffff;
+          padding: 0.2em 0.4em;
+          border-radius: 4px; }
+          .kuiDateIntervalWrapper .kuiDateIntervalContent .kuiDateIntervalMenu .uiUnstyled li.selected a {
+            color: #ffffff; }

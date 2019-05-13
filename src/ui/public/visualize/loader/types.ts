@@ -36,6 +36,21 @@ export interface Filter {
   query: object;
 }
 
+export interface DateInterval {
+  display: string;
+  value: string;
+}
+
+export interface VisualizationAggParams {
+  type: string,
+  params: any,
+  [key: string]: any;
+}
+
+export interface VisualizationParams {
+  [key: string]: any;
+}
+
 export type Filters = Filter[];
 
 export enum QueryLanguageType {
@@ -103,6 +118,13 @@ export interface VisualizeLoaderParams {
    * global AppState.
    */
   appState?: AppState;
+  /**
+   * The appState this visualization should use. If you don't specify it, the
+   * global AppState (that is decoded in the URL) will be used. Usually you don't
+   * need to overwrite this, unless you don't want the visualization to use the
+   * global AppState.
+   */
+  dateInterval?: DateInterval
 }
 
 /**
@@ -110,5 +132,5 @@ export interface VisualizeLoaderParams {
  */
 export type VisualizeUpdateParams = Pick<
   VisualizeLoaderParams,
-  'timeRange' | 'dataAttrs' | 'filters' | 'query'
+  'timeRange' | 'dataAttrs' | 'filters' | 'query' | 'dateInterval'
 >;

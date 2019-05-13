@@ -175,6 +175,7 @@ DashboardPanelUi.propTypes = {
     timeRange: PropTypes.object,
     filters: PropTypes.array,
     query: PropTypes.object,
+    dateInterval: PropTypes.object,
     embeddableCustomization: PropTypes.object,
     hidePanelTitles: PropTypes.bool.isRequired,
   }),

@@ -38,6 +38,7 @@ import {
   clearStagedFilters,
   updateFilters,
   updateQuery,
+  updateDateInterval,
   closeContextMenu,
   requestReload,
 } from './actions';
@@ -57,6 +58,7 @@ import {
   getEmbeddables,
   getEmbeddableMetadata,
   getQuery,
+  getDateInterval,
   getFilters,
 } from '../selectors';
 
@@ -209,6 +211,10 @@ export class DashboardStateManager {
       store.dispatch(updateQuery(this.getQuery()));
     }
 
+    if (getDateInterval(state) !== this.getDateInterval()) {
+      store.dispatch(updateDateInterval(this.getDateInterval()));
+    }
+
     this._pushFiltersToStore();
   }
 
@@ -301,6 +307,8 @@ export class DashboardStateManager {
     // Need to make a copy to ensure they are not overwritten.
     this.stateDefaults.filters = [...this.getLastSavedFilterBars()];
 
+    this.stateDefaults.dateInterval = this.lastSavedDashboardFilters.dateInterval;
+
     this.isDirty = false;
     this.appState.setDefaults(this.stateDefaults);
     this.appState.reset();
@@ -309,14 +317,15 @@ export class DashboardStateManager {
 
   /**
    * Returns an object which contains the current filter state of this.savedDashboard.
-   * @returns {{timeTo: String, timeFrom: String, filterBars: Array, query: Object}}
+   * @returns {{timeTo: String, timeFrom: String, filterBars: Array, query: Object, dateInterval: Object}}
    */
   getFilterState() {
     return {
       timeTo: this.savedDashboard.timeTo,
       timeFrom: this.savedDashboard.timeFrom,
       filterBars: this.getDashboardFilterBars(),
-      query: this.getDashboardQuery()
+      query: this.getDashboardQuery(),
+      dateInterval: this.savedDashboard.dateInterval
     };
   }
 
@@ -348,6 +357,10 @@ export class DashboardStateManager {
 
   getQuery() {
     return this.appState.query;
+  }
+
+  getDateInterval() {
+    return this.appState.dateInterval;
   }
 
   getUseMargins() {
@@ -387,6 +400,15 @@ export class DashboardStateManager {
     this.saveState();
   }
 
+  getIntervalRestore() {
+    return this.appState.intervalRestore;
+  }
+
+  setIntervalRestore(intervalRestore) {
+    this.appState.intervalRestore = intervalRestore;
+    this.saveState();
+  }
+
   /**
    * @returns {boolean}
    */
@@ -408,6 +430,10 @@ export class DashboardStateManager {
 
   getLastSavedQuery() {
     return this.lastSavedDashboardFilters.query;
+  }
+
+  getLastSavedDateInterval() {
+    return this.lastSavedDashboardFilters.dateInterval;
   }
 
   /**
@@ -450,6 +476,10 @@ export class DashboardStateManager {
       !FilterUtils.areTimesEqual(this.lastSavedDashboardFilters.timeFrom, timeFilter.getTime().from) ||
       !FilterUtils.areTimesEqual(this.lastSavedDashboardFilters.timeTo, timeFilter.getTime().to)
     );
+  }
+
+  getIntervalChanged() {
+    return !FilterUtils.isDateIntervalEqual(this.appState.dateInterval, this.getLastSavedDateInterval());
   }
 
   /**
@@ -535,6 +565,9 @@ export class DashboardStateManager {
     if (this.savedDashboard.timeRestore && this.getTimeChanged(timeFilter)) {
       changedFilters.push('time range');
     }
+    if (this.savedDashboard.intervalRestore && this.getIntervalChanged()) {
+      changedFilters.push('date interval');
+    }
     return changedFilters;
   }
 
@@ -594,10 +627,12 @@ export class DashboardStateManager {
    * Applies the current filter state to the dashboard.
    * @param filter {Array.<Object>} An array of filter bar filters.
    */
-  applyFilters(query, filters) {
+  applyFilters(query, filters, dateInterval) {
     this.appState.query = query;
+    this.appState.dateInterval = dateInterval;
     this.savedDashboard.searchSource.setField('query', query);
     this.savedDashboard.searchSource.setField('filter', filters);
+
     this.saveState();
     // pinned filters go on global state, therefore are not propagated to store via app state and have to be pushed manually.
     this._pushFiltersToStore();
@@ -614,6 +649,8 @@ export class DashboardStateManager {
     this.stateMonitor.ignoreProps('filters');
     // Query needs to be compared manually because saved legacy queries get migrated in app state automatically
     this.stateMonitor.ignoreProps('query');
+
+    this.stateMonitor.ignoreProps('dateInterval');
 
     this.stateMonitor.onChange(status => {
       this.isDirty = status.dirty;
