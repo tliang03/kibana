@@ -225,10 +225,6 @@ export class EmbeddedVisualizeHandler {
 
     if(intervalValue) {
 
-      if(intervalValue !== 'auto') {
-        intervalValue = '1' + intervalValue;
-      }
-
       let visState = _.cloneDeep(this.vis.getState());
       const aggs: VisualizationAggParams[] = _.get(visState, ['aggs']);
       const params: VisualizationParams = _.get(visState, ['params']);
@@ -243,6 +239,11 @@ export class EmbeddedVisualizeHandler {
       visState.aggs = aggs;
 
       if(params && params.interval ){
+
+        if(intervalValue !== 'auto') {
+          intervalValue = '1' + intervalValue;
+        }
+
         params.interval = intervalValue;
       }
 
