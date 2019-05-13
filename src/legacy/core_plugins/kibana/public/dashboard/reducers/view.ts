@@ -21,7 +21,7 @@ import { cloneDeep } from 'lodash';
 import { Reducer } from 'redux';
 import { ViewActions, ViewActionTypeKeys } from '../actions';
 
-import { Filters, Query, TimeRange } from 'ui/embeddable';
+import { Filters, Query, TimeRange, DateInterval } from 'ui/embeddable';
 import { QueryLanguageType } from 'ui/embeddable/types';
 import { DashboardViewMode } from '../dashboard_view_mode';
 import { PanelId, ViewState } from '../selectors';
@@ -71,6 +71,11 @@ const updateQuery = (view: ViewState, query: Query) => ({
   query,
 });
 
+const updateDateInterval = (view: ViewState, dateInterval: DateInterval) => ({
+  ...view,
+  dateInterval,
+});
+
 const updateUseMargins = (view: ViewState, useMargins: boolean) => ({
   ...view,
   useMargins,
@@ -87,6 +92,7 @@ export const viewReducer: Reducer<ViewState> = (
     hidePanelTitles: false,
     isFullScreenMode: false,
     query: { language: QueryLanguageType.LUCENE, query: '' },
+    dateInterval: { display: 'Auto', value: 'auto'},
     timeRange: { to: 'now', from: 'now-15m' },
     useMargins: true,
     viewMode: DashboardViewMode.VIEW,
@@ -116,6 +122,8 @@ export const viewReducer: Reducer<ViewState> = (
       return updateFilters(view, action.payload);
     case ViewActionTypeKeys.UPDATE_QUERY:
       return updateQuery(view, action.payload);
+    case ViewActionTypeKeys.UPDATE_DATE_INTERVAL:
+      return updateDateInterval(view, action.payload);
     default:
       return view;
   }

@@ -137,6 +137,8 @@ app.directive('dashboardApp', function ($injector) {
           timeRestore: dashboardStateManager.getTimeRestore(),
           title: dashboardStateManager.getTitle(),
           description: dashboardStateManager.getDescription(),
+          intervalRestore: dashboardStateManager.getIntervalRestore(),
+          dateInterval: dashboardStateManager.getDateInterval()
         };
         $scope.panels = dashboardStateManager.getPanels();
         $scope.indexPatterns = dashboardStateManager.getPanelIndexPatterns();
@@ -157,7 +159,11 @@ app.directive('dashboardApp', function ($injector) {
           query: '',
           language: localStorage.get('kibana.userQueryLanguage') || config.get('search:queryLanguage')
         },
-        filterBar.getFilters()
+        filterBar.getFilters(),
+        dashboardStateManager.getDateInterval() || {
+          value: 'auto',
+          display: 'Auto'
+        }
       );
 
       timefilter.enableAutoRefreshSelector();
@@ -228,7 +234,7 @@ app.directive('dashboardApp', function ($injector) {
           dashboardStateManager.requestReload();
         } else {
           $scope.model.query = query;
-          dashboardStateManager.applyFilters($scope.model.query, filterBar.getFilters());
+          dashboardStateManager.applyFilters($scope.model.query, filterBar.getFilters(), $scope.model.dateInterval);
         }
         $scope.refresh();
       };
@@ -255,7 +261,7 @@ app.directive('dashboardApp', function ($injector) {
       });
 
       function updateViewMode(newMode) {
-        $scope.topNavMenu = getTopNavConfig(newMode, navActions, dashboardConfig.getHideWriteControls()); // eslint-disable-line no-use-before-define
+        $scope.topNavMenu = getTopNavConfig(newMode, navActions, dashboardConfig.getHideWriteControls(), $scope.model); // eslint-disable-line no-use-before-define
         dashboardStateManager.switchViewMode(newMode);
         $scope.dashboardViewMode = newMode;
       }
@@ -366,6 +372,7 @@ app.directive('dashboardApp', function ($injector) {
         dashboardStateManager.setFullScreenMode(false);
         $scope.kbnTopNav.click('edit');
       };
+
       const navActions = {};
       navActions[TopNavIds.DOCUMENTATION] = () => $window.open(documentationLinks.kibana.dashboard);
       navActions[TopNavIds.FULL_SCREEN] = () =>
@@ -376,11 +383,21 @@ app.directive('dashboardApp', function ($injector) {
         const currentTitle = dashboardStateManager.getTitle();
         const currentDescription = dashboardStateManager.getDescription();
         const currentTimeRestore = dashboardStateManager.getTimeRestore();
-        const onSave = ({ newTitle, newDescription, newCopyOnSave, newTimeRestore, isTitleDuplicateConfirmed, onTitleDuplicate }) => {
+        const currentIntervalRestore = dashboardStateManager.getIntervalRestore();
+        const onSave = ({
+          newTitle,
+          newDescription,
+          newCopyOnSave,
+          newTimeRestore,
+          newIntervalRestore,
+          isTitleDuplicateConfirmed,
+          onTitleDuplicate
+        }) => {
           dashboardStateManager.setTitle(newTitle);
           dashboardStateManager.setDescription(newDescription);
           dashboardStateManager.savedDashboard.copyOnSave = newCopyOnSave;
           dashboardStateManager.setTimeRestore(newTimeRestore);
+          dashboardStateManager.setIntervalRestore(newIntervalRestore);
           const saveOptions = {
             confirmOverwrite: false,
             isTitleDuplicateConfirmed,
@@ -392,6 +409,7 @@ app.directive('dashboardApp', function ($injector) {
               dashboardStateManager.setTitle(currentTitle);
               dashboardStateManager.setDescription(currentDescription);
               dashboardStateManager.setTimeRestore(currentTimeRestore);
+              dashboardStateManager.setIntervalRestore(currentIntervalRestore);
             }
             return { id, error };
           });
@@ -404,6 +422,7 @@ app.directive('dashboardApp', function ($injector) {
             title={currentTitle}
             description={currentDescription}
             timeRestore={currentTimeRestore}
+            intervalRestore={currentIntervalRestore}
             showCopyOnSave={dash.id ? true : false}
           />
         );
@@ -472,9 +491,16 @@ app.directive('dashboardApp', function ($injector) {
 
       updateViewMode(dashboardStateManager.getViewMode());
 
+      $scope.updateDateInterval = (interval) => {
+        $scope.model.dateInterval = interval;
+
+        updateViewMode($scope.dashboardViewMode);
+
+        dashboardStateManager.applyFilters($scope.model.query, filterBar.getFilters(), interval);
+      };
       // update root source when filters update
       $scope.$listen(filterBar, 'update', function () {
-        dashboardStateManager.applyFilters($scope.model.query, filterBar.getFilters());
+        dashboardStateManager.applyFilters($scope.model.query, filterBar.getFilters(), $scope.model.dateInterval);
       });
 
       // update data when filters fire fetch event

@@ -142,3 +142,8 @@ export {
 export {
   KuiStickyHeader
 } from './sticky_header';
+
+
+export {
+  KuiDateIntervalPicker
+} from './date_interval_picker';

@@ -57,7 +57,12 @@ module.factory('SavedDashboard', function (Private, config, i18n) {
         timeRestore: false,
         timeTo: undefined,
         timeFrom: undefined,
-        refreshInterval: undefined
+        intervalRestore: false,
+        refreshInterval: undefined,
+        dateInterval: {
+          value: 'auto',
+          display: 'Auto'
+        }
       },
 
       // if an indexPattern was saved with the searchsource of a SavedDashboard
@@ -95,7 +100,15 @@ module.factory('SavedDashboard', function (Private, config, i18n) {
         section: { type: 'integer' },
         value: { type: 'integer' }
       }
-    }
+    },
+    dateInterval: {
+      type: 'object',
+      properties: {
+        display: { type: 'keyword' },
+        value: { type: 'keyword' }
+      }
+    },
+    intervalRestore: 'boolean'
   };
 
   // Order these fields to the top, the rest are alphabetical

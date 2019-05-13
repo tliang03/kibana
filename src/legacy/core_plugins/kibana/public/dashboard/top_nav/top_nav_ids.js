@@ -27,4 +27,5 @@ export const TopNavIds = {
   ENTER_EDIT_MODE: 'enterEditMode',
   CLONE: 'clone',
   FULL_SCREEN: 'fullScreenMode',
+  DATE_INTERVAL: 'dateInterval'
 };

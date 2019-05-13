@@ -21,7 +21,8 @@ import 'ngreact';
 
 import {
   KuiToolBarSearchBox,
-  KuiStickyHeader
+  KuiStickyHeader,
+  KuiDateIntervalPicker
 } from '@kbn/ui-framework/components';
 
 import {
@@ -39,6 +40,8 @@ const app = uiModules.get('app/kibana', ['react']);
 app.directive('toolBarSearchBox', reactDirective => reactDirective(KuiToolBarSearchBox));
 
 app.directive('stickyHeader', reactDirective => reactDirective(KuiStickyHeader));
+
+app.directive('dateIntervalPicker', reactDirective => reactDirective(KuiDateIntervalPicker));
 
 app.directive('confirmModal', reactDirective => reactDirective(EuiConfirmModal));
 

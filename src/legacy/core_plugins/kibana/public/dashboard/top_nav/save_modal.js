@@ -35,6 +35,7 @@ class DashboardSaveModalUi extends React.Component {
     this.state = {
       description: props.description,
       timeRestore: props.timeRestore,
+      intervalRestore: props.intervalRestore,
     };
   }
 
@@ -44,6 +45,7 @@ class DashboardSaveModalUi extends React.Component {
       newDescription: this.state.description,
       newCopyOnSave,
       newTimeRestore: this.state.timeRestore,
+      newIntervalRestore: this.state.intervalRestore,
       isTitleDuplicateConfirmed,
       onTitleDuplicate,
     });
@@ -58,6 +60,12 @@ class DashboardSaveModalUi extends React.Component {
   onTimeRestoreChange = (event) => {
     this.setState({
       timeRestore: event.target.checked,
+    });
+  }
+
+  onIntervalRestoreChange = (event) => {
+    this.setState({
+      intervalRestore: event.target.checked,
     });
   }
 
@@ -94,6 +102,22 @@ class DashboardSaveModalUi extends React.Component {
             onChange={this.onTimeRestoreChange}
           />
         </EuiFormRow>
+
+        <EuiFormRow
+          label={<FormattedMessage
+            id="kbn.dashboard.topNav.saveModal.storeIntervalWithDashboardFormRowLabel"
+            defaultMessage="Store date interval with dashboard"
+          />}
+          helpText={<FormattedMessage
+            id="kbn.dashboard.topNav.saveModal.storeIntervalWithDashboardFormRowHelpText"
+            defaultMessage="This changes the date interval to all time based visualizations date interval when this dashboard is loaded."
+          />}
+        >
+          <EuiSwitch
+            checked={this.state.intervalRestore}
+            onChange={this.onIntervalRestoreChange}
+          />
+        </EuiFormRow>
       </Fragment>
     );
   }
@@ -118,6 +142,7 @@ DashboardSaveModalUi.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   timeRestore: PropTypes.bool.isRequired,
+  intervalRestore: PropTypes.bool.isRequired,
   showCopyOnSave: PropTypes.bool.isRequired,
 };
 

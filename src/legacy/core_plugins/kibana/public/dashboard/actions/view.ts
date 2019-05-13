@@ -18,7 +18,7 @@
  */
 
 import { createAction } from 'redux-actions';
-import { Filters, Query, TimeRange } from 'ui/embeddable';
+import { Filters, Query, TimeRange, DateInterval } from 'ui/embeddable';
 import { KibanaAction } from '../../selectors/types';
 import { DashboardViewMode } from '../dashboard_view_mode';
 import { PanelId } from '../selectors';
@@ -34,6 +34,7 @@ export enum ViewActionTypeKeys {
   UPDATE_TIME_RANGE = 'UPDATE_TIME_RANGE',
   UPDATE_FILTERS = 'UPDATE_FILTERS',
   UPDATE_QUERY = 'UPDATE_QUERY',
+  UPDATE_DATE_INTERVAL = 'UPDATE_DATE_INTERVAL',
   CLOSE_CONTEXT_MENU = 'CLOSE_CONTEXT_MENU',
 }
 
@@ -69,6 +70,8 @@ export interface UpdateFiltersAction
 
 export interface UpdateQueryAction extends KibanaAction<ViewActionTypeKeys.UPDATE_QUERY, Query> {}
 
+export interface UpdateDateIntervalAction extends KibanaAction<ViewActionTypeKeys.UPDATE_DATE_INTERVAL, DateInterval> {}
+
 export type ViewActions =
   | UpdateViewModeAction
   | SetVisibleContextMenuPanelIdAction
@@ -80,7 +83,8 @@ export type ViewActions =
   | UpdateHidePanelTitlesAction
   | UpdateTimeRangeAction
   | UpdateFiltersAction
-  | UpdateQueryAction;
+  | UpdateQueryAction
+  | UpdateDateIntervalAction;
 
 export const updateViewMode = createAction<string>(ViewActionTypeKeys.UPDATE_VIEW_MODE);
 export const closeContextMenu = createAction(ViewActionTypeKeys.CLOSE_CONTEXT_MENU);
@@ -99,3 +103,4 @@ export const updateHidePanelTitles = createAction<boolean>(
 export const updateTimeRange = createAction<TimeRange>(ViewActionTypeKeys.UPDATE_TIME_RANGE);
 export const updateFilters = createAction<Filters>(ViewActionTypeKeys.UPDATE_FILTERS);
 export const updateQuery = createAction<Query>(ViewActionTypeKeys.UPDATE_QUERY);
+export const updateDateInterval = createAction<DateInterval>(ViewActionTypeKeys.UPDATE_DATE_INTERVAL);

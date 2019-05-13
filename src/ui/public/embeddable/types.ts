@@ -30,6 +30,7 @@ export interface FilterMeta {
 export interface Filter {
   meta: FilterMeta;
   query: object;
+  dateInterval: object;
 }
 
 export type Filters = Filter[];
@@ -46,7 +47,10 @@ export interface Query {
 export interface EmbeddableCustomization {
   [key: string]: object | string;
 }
-
+export interface DateInterval {
+  display: string;
+  value: string;
+}
 export interface ContainerState {
   // 'view' or 'edit'. Should probably be an enum but I'm undecided where to define it, here or in dashboard code.
   viewMode: string;
@@ -56,6 +60,8 @@ export interface ContainerState {
   filters: Filters;
 
   query: Query;
+
+  dateInterval: DateInterval;
 
   // The shape will be up to the embeddable type.
   embeddableCustomization?: EmbeddableCustomization;

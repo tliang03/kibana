@@ -99,6 +99,11 @@ export class FilterUtils {
     return this.convertTimeToUTCString(timeA) === this.convertTimeToUTCString(timeB);
   }
 
+  static isDateIntervalEqual(intervalA, intervalB) {
+    return JSON.stringify(intervalA) === JSON.stringify(intervalB);
+
+  }
+
   /**
    * Depending on how a dashboard is loaded, the filter object may contain a $$hashKey and $state that will throw
    * off a filter comparison. This removes those variables.
