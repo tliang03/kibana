@@ -45,8 +45,8 @@ export function getProjectPaths(rootPath: string, options: IProjectPathOptions) 
   projectPaths.push(resolve(rootPath, 'test/plugin_functional/plugins/*'));
 
   if (!ossOnly) {
-    projectPaths.push(resolve(rootPath, 'x-pack'));
-    projectPaths.push(resolve(rootPath, 'x-pack/plugins/*'));
+    // projectPaths.push(resolve(rootPath, 'x-pack'));
+    // projectPaths.push(resolve(rootPath, 'x-pack/plugins/*'));
   }
 
   if (!skipKibanaExtra) {
