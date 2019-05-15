@@ -17862,8 +17862,8 @@ function getProjectPaths(rootPath, options) {
     // correct and the expect behavior.
     projectPaths.push((0, _path.resolve)(rootPath, 'test/plugin_functional/plugins/*'));
     if (!ossOnly) {
-        projectPaths.push((0, _path.resolve)(rootPath, 'x-pack'));
-        projectPaths.push((0, _path.resolve)(rootPath, 'x-pack/plugins/*'));
+        // projectPaths.push(resolve(rootPath, 'x-pack'));
+        // projectPaths.push(resolve(rootPath, 'x-pack/plugins/*'));
     }
     if (!skipKibanaExtra) {
         projectPaths.push((0, _path.resolve)(rootPath, '../kibana-extra/*'));

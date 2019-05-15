@@ -39,7 +39,7 @@ import {
   CreatePackageJsonTask,
   CreateReadmeTask,
   CreateRpmPackageTask,
-  DownloadNodeBuildsTask,
+  // DownloadNodeBuildsTask,
   ExtractNodeBuildsTask,
   InstallDependenciesTask,
   OptimizeBuildTask,
@@ -50,7 +50,7 @@ import {
   TranspileScssTask,
   UpdateLicenseFileTask,
   VerifyEnvTask,
-  VerifyExistingNodeBuildsTask,
+  // VerifyExistingNodeBuildsTask,
   WriteShaSumsTask,
 } from './tasks';
 
@@ -94,7 +94,7 @@ export async function buildDistributables(options) {
    */
   await run(VerifyEnvTask);
   await run(CleanTask);
-  await run(downloadFreshNode ? DownloadNodeBuildsTask : VerifyExistingNodeBuildsTask);
+  // await run(downloadFreshNode ? DownloadNodeBuildsTask : VerifyExistingNodeBuildsTask);
   await run(ExtractNodeBuildsTask);
 
   /**
