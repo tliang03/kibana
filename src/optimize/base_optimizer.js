@@ -351,6 +351,15 @@ export default class BaseOptimizer {
               }
             ]),
           },
+          {
+            loader: 'babel-loader',
+            test: /\.jsx$/,
+            options: {
+              presets: [
+                BABEL_PRESET_PATH
+              ]
+            }
+          },
           ...this.uiBundles.getPostLoaders().map(loader => ({
             enforce: 'post',
             ...loader
@@ -360,7 +369,7 @@ export default class BaseOptimizer {
       },
 
       resolve: {
-        extensions: ['.js', '.json'],
+        extensions: ['.js', '.json', '.jsx'],
         mainFields: ['browser', 'browserify', 'main'],
         modules: [
           'webpackShims',

@@ -1,0 +1,29 @@
+.pivottable__label {
+  width: 250px;
+}
+
+.pivottable__buttonarea {
+  position: absolute;
+  right: 30px;
+
+  button {
+    padding-left: 10px;
+  }
+}
+
+#pivot-wrapper {
+  width: 100%;
+  overflow-x: auto;
+
+  .reactPivot {
+    margin-top: 0;
+  }
+}
+
+
+.reactPivot-results {
+  th {
+    font-weight: bold;
+    padding: 8px;
+  }
+}
