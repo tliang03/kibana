@@ -20,8 +20,8 @@
 import wreck from 'wreck';
 
 export async function getNodeShasums(nodeVersion) {
-  const url = `https://nodejs.org/dist/v${nodeVersion}/SHASUMS256.txt`;
-
+  // const url = `https://nodejs.org/dist/v${nodeVersion}/SHASUMS256.txt`;
+  const url = `https://repository.walmart.com/content/repositories/nodejs/v${nodeVersion}/SHASUMS256.txt`;
   const { res, payload } = await wreck.get(url);
 
   if (res.statusCode !== 200) {

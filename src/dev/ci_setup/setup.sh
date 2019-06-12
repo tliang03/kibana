@@ -59,7 +59,8 @@ if [[ "$OS" == "win" ]]; then
   nodeUrl="https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-win-x64.zip"
 else
   nodeBin="$nodeDir/bin"
-  nodeUrl="https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-linux-x64.tar.gz"
+  nodeUrl="https://repository.walmart.com/content/repositories/nodejs/v$nodeVersion/node-v$nodeVersion-linux-x64.tar.gz"
+  ### nodeUrl="https://nodejs.org/dist/v$nodeVersion/node-v$nodeVersion-linux-x64.tar.gz"
 fi
 
 echo " -- node: version=v${nodeVersion} dir=$nodeDir"
