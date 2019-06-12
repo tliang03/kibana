@@ -16,8 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 import { resolve } from 'path';
+import { log } from './utils/log';
 
 export interface IProjectPathOptions {
   'skip-kibana-extra'?: boolean;
@@ -32,6 +32,8 @@ export function getProjectPaths(rootPath: string, options: IProjectPathOptions) 
   const ossOnly = Boolean(options.oss);
 
   const projectPaths = [rootPath, resolve(rootPath, 'packages/*')];
+
+  log.write(`[Is oss only? ${ossOnly}]\n`);
 
   // This is needed in order to install the dependencies for the declared
   // plugin functional used in the selenium functional tests.
