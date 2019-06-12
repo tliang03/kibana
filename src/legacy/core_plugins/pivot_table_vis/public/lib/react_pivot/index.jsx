@@ -1,19 +1,21 @@
-var _ = {
-  filter: require('lodash/filter'),
-  map: require('lodash/map'),
-  find: require('lodash/find')
-}
-var React = require('react')
-var createReactClass = require('create-react-class')
-var DataFrame = require('../dataframe')
-var Emitter = require('../wildemitter/wildemitter')
+// var _ = {
+//   filter: require('lodash/filter'),
+//   map: require('lodash/map'),
+//   find: require('lodash/find')
+// };
 
-var partial = require('./lib/partial')
-var download = require('./lib/download')
-var getValue = require('./lib/get_value')
-var PivotTable = require('./lib/pivot_table.jsx')
-var Dimensions = require('./lib/dimensions.jsx')
-var ColumnControl = require('./lib/column_control.jsx')
+const _ = require('lodash');
+const React = require('react')
+const createReactClass = require('create-react-class')
+const DataFrame = require('../dataframe')
+const Emitter = require('../wildemitter/wildemitter')
+
+const partial = require('./lib/partial')
+const download = require('./lib/download')
+const getValue = require('./lib/get_value')
+const PivotTable = require('./lib/pivot_table.jsx')
+const Dimensions = require('./lib/dimensions.jsx')
+const ColumnControl = require('./lib/column_control.jsx')
 
 module.exports = createReactClass({
   displayName: 'ReactPivot',

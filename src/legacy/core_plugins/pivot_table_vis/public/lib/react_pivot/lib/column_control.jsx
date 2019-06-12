@@ -1,6 +1,6 @@
-var _ = { without: require('lodash/without') }
-var React = require('react')
-var createReactClass = require('create-react-class')
+const _ = require('lodash');
+const React = require('react');
+const createReactClass = require('create-react-class');
 
 module.exports = createReactClass({
   getDefaultProps: function () {

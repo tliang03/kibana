@@ -1,8 +1,8 @@
-var _ = { range: require('lodash/range') }
-var React = require('react')
-var createReactClass = require('create-react-class')
-var partial = require('./partial')
-var getValue = require('./get_value')
+const _ = require('lodash');
+const React = require('react');
+const createReactClass = require('create-react-class');
+const partial = require('./partial');
+const getValue = require('./get_value');
 
 module.exports = createReactClass({
 
@@ -130,7 +130,7 @@ module.exports = createReactClass({
       <td className={col.className}
           key={[col.id, col.title, row.key, row._level, index].join('\xff')}
           title={col.title}>
-        <span dangerouslySetInnerHTML={{__html: text.toString() || ''}}></span> {solo}
+        <span dangerouslySetInnerHTML={{__html: (text !== undefined && text.toString()) || ''}}></span> {solo}
       </td>
     )
   },
