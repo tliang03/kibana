@@ -17844,13 +17844,34 @@ exports.getProjectPaths = getProjectPaths;
 
 var _path = __webpack_require__(16);
 
+var _log = __webpack_require__(33);
+
 /**
  * Returns all the paths where plugins are located
+ */
+/*
+ * Licensed to Elasticsearch B.V. under one or more contributor
+ * license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright
+ * ownership. Elasticsearch B.V. licenses this file to you under
+ * the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 function getProjectPaths(rootPath, options) {
     const skipKibanaExtra = Boolean(options['skip-kibana-extra']);
     const ossOnly = Boolean(options.oss);
     const projectPaths = [rootPath, (0, _path.resolve)(rootPath, 'packages/*')];
+    _log.log.write(`[Is oss only? ${ossOnly}]\n`);
     // This is needed in order to install the dependencies for the declared
     // plugin functional used in the selenium functional tests.
     // As we are now using the webpack dll for the client vendors dependencies
@@ -17871,24 +17892,7 @@ function getProjectPaths(rootPath, options) {
         projectPaths.push((0, _path.resolve)(rootPath, '../kibana-extra/*/plugins/*'));
     }
     return projectPaths;
-} /*
-   * Licensed to Elasticsearch B.V. under one or more contributor
-   * license agreements. See the NOTICE file distributed with
-   * this work for additional information regarding copyright
-   * ownership. Elasticsearch B.V. licenses this file to you under
-   * the Apache License, Version 2.0 (the "License"); you may
-   * not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   *
-   *    http://www.apache.org/licenses/LICENSE-2.0
-   *
-   * Unless required by applicable law or agreed to in writing,
-   * software distributed under the License is distributed on an
-   * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-   * KIND, either express or implied.  See the License for the
-   * specific language governing permissions and limitations
-   * under the License.
-   */
+}
 
 /***/ }),
 /* 136 */
