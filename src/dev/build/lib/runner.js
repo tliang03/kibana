@@ -23,7 +23,7 @@ import { isErrorLogged, markErrorLogged } from './errors';
 
 import { createBuild } from './build';
 
-export function createRunner({ config, log, buildOssDist, buildDefaultDist }) {
+export function createRunner({ config, log, buildOssDist, buildDefaultDist, targetFileName }) {
   async function execTask(desc, fn, ...args) {
     log.info(desc);
     log.indent(4);
@@ -54,11 +54,13 @@ export function createRunner({ config, log, buildOssDist, buildDefaultDist }) {
   }
 
   const builds = [];
+
   if (buildDefaultDist) {
     builds.push(
       createBuild({
         config,
         oss: false,
+        targetFileName: targetFileName
       })
     );
   }
@@ -67,6 +69,7 @@ export function createRunner({ config, log, buildOssDist, buildDefaultDist }) {
       createBuild({
         config,
         oss: true,
+        targetFileName: targetFileName
       })
     );
   }
