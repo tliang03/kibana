@@ -1,9 +1,11 @@
-const _ = {
-  extend: require('lodash/extend'),
-  each: require('lodash/each'),
-  sortBy: require('lodash/sortBy'),
-  find: require('lodash/find')
-};
+// const _ = {
+//   extend: require('lodash/extend'),
+//   each: require('lodash/each'),
+//   sortBy: require('lodash/sortBy'),
+//   find: require('lodash/find')
+// };
+
+const _ = require('lodash');
 
 module.exports = function (opts) { return new DataFrame(opts); };
 

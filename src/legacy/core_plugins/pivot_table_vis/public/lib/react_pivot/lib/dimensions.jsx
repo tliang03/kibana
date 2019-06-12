@@ -1,7 +1,7 @@
-var _ = { compact: require('lodash/compact') }
-var React = require('react')
-var createReactClass = require('create-react-class')
-var partial = require('./partial')
+const _ = require('lodash');
+const React = require('react');
+const createReactClass = require('create-react-class');
+const partial = require('./partial');
 
 module.exports = createReactClass({
   getDefaultProps: function () {
