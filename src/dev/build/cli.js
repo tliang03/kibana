@@ -32,6 +32,9 @@ process.chdir(resolve(__dirname, '../../../'));
 
 const unknownFlags = [];
 const flags = getopts(process.argv.slice(0), {
+  string: [
+    'fname'
+  ],
   boolean: [
     'oss',
     'no-oss',
@@ -53,7 +56,9 @@ const flags = getopts(process.argv.slice(0), {
     debug: true
   },
   unknown: (flag) => {
-    unknownFlags.push(flag);
+    if(flag !== 'fname'){
+      unknownFlags.push(flag);
+    }
   }
 });
 
@@ -82,6 +87,7 @@ if (flags.help) {
         --skip-node-download    {dim Reuse existing downloads of node.js}
         --verbose,-v            {dim Turn on verbose logging}
         --no-debug              {dim Turn off debug logging}
+        --fname                 {dim Target file name}
     `) + '\n'
   );
   process.exit(1);
@@ -117,6 +123,7 @@ buildDistributables({
   createRpmPackage: isOsPackageDesired('rpm'),
   createDebPackage: isOsPackageDesired('deb'),
   targetAllPlatforms: Boolean(flags['all-platforms']),
+  targetFileName: flags.fname
 }).catch(error => {
   if (!isErrorLogged(error)) {
     log.error('Uncaught error');

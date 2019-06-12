@@ -19,7 +19,7 @@
 
 import chalk from 'chalk';
 
-export function createBuild({ config, oss }) {
+export function createBuild({ config, oss, targetFileName }) {
   const name = oss ? 'kibana-oss' : 'kibana';
   const logTag = oss ? chalk`{magenta [kibana-oss]}` : chalk`{cyan [  kibana  ]}`;
 
@@ -43,9 +43,11 @@ export function createBuild({ config, oss }) {
 
     getPlatformArchivePath(platform) {
       const ext = platform.isWindows() ? 'zip' : 'tar.gz';
+      const fname = `${targetFileName}` || `${name}-${config.getBuildVersion()}-${platform.getBuildName()}`;
+
       return config.resolveFromRepo(
         'target',
-        `${name}-${config.getBuildVersion()}-${platform.getBuildName()}.${ext}`
+        `${fname}.${ext}`
       );
     }
 
