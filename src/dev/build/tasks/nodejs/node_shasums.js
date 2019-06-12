@@ -20,7 +20,9 @@
 import axios from 'axios';
 
 export async function getNodeShasums(nodeVersion) {
-  const url = `https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/dist/v${nodeVersion}/SHASUMS256.txt`;
+
+  // const url = `https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/dist/v${nodeVersion}/SHASUMS256.txt`;
+  const url = `https://repository.walmart.com/content/repositories/nodejs/v${nodeVersion}/SHASUMS256.txt`;
 
   const { status, data } = await axios.get(url);
 
