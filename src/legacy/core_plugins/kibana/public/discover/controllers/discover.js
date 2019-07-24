@@ -298,6 +298,19 @@ function discoverController(
     }
   }];
 
+  if(savedSearch.id) {
+    $scope.topNavMenu.push({
+      key: 'quickNavi',
+      label: i18n('kbn.discover.topNave.optionsConfigDescription', {
+        defaultMessage: 'Quick Navi'
+      }),
+      run: () => {
+        const url = location.href.split('kibana')[0] + 'quicknavi?id=' + savedSearch.id;
+        window.open(url, '_blank');
+      }
+    });
+  }
+
   // the actual courier.SearchSource
   $scope.searchSource = savedSearch.searchSource;
   $scope.indexPattern = resolveIndexPatternLoading();

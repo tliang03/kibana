@@ -44,4 +44,4 @@ app.directive(
   reactDirective => reactDirective(wrapInI18nContext(DiscoverUnsupportedIndexPattern), ['unsupportedType'])
 );
 
-app.directive('panelResizer', reactDirective => reactDirective(injectI18nProvider(KuiPanelResizer)));
+app.directive('panelResizer', reactDirective => reactDirective(wrapInI18nContext(KuiPanelResizer)));
