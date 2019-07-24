@@ -1,0 +1,62 @@
+{
+  "index": "tools.loogings",
+  "body": {
+    "settings": {
+      "index": {
+        "number_of_shards": 1
+      }
+    },
+    "mappings": {
+      "_doc" : {
+        "properties": {
+          "create_ts":  {
+            "type": "date",
+            "ignore_malformed": true,
+            "format": "strict_date_optional_time||yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z||yyyy-MM-dd HH:mm:ss||epoch_millis"
+          },
+          "start_ts": {
+            "type": "date",
+            "ignore_malformed": true,
+            "format": "strict_date_optional_time||yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z||yyyy-MM-dd HH:mm:ss||epoch_millis"
+          },
+          "end_ts": {
+            "type": "date",
+            "ignore_malformed": true,
+            "format": "strict_date_optional_time||yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z||yyyy-MM-dd HH:mm:ss||epoch_millis"
+          },
+          "query_string": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "payloads": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "duration": {
+            "type": "integer"
+          },
+          "end_point": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "include_type_name": true
+}

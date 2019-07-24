@@ -25,6 +25,11 @@ import Boom from 'boom';
 import filterHeaders from './filter_headers';
 import { parseConfig } from './parse_config';
 
+import LOGGING_MAPPING from '../logging_mapping.json';
+import { LOGGING_INDEX, LOGGING_BODY } from '../logging_const';
+
+const IGNORE_TYPES = ['mget', 'update', 'get'];
+
 export class Cluster {
   constructor(config) {
     this._config = {
@@ -42,13 +47,29 @@ export class Cluster {
     return this;
   }
 
-  callWithRequest = (req = {}, endpoint, clientParams = {}, options = {}) => {
+  callWithRequest = async (req = {}, endpoint, clientParams = {}, options = {}) => {
+    const shdLog = shouldLog(req, endpoint, clientParams);
+    const startTs = new Date();
+
+    let logRes;
+    let logId;
+
     if (req.headers) {
       const filteredHeaders = filterHeaders(req.headers, this.getRequestHeadersWhitelist());
       set(clientParams, 'headers', filteredHeaders);
     }
 
-    return callAPI(this._noAuthClient, endpoint, clientParams, options);
+    if(shdLog) {
+      logRes = await this.setInkiruLogs(req, startTs, endpoint, clientParams);
+      logId = logRes && logRes.items[0].index._id;
+    }
+
+    return callAPI(this._noAuthClient, endpoint, clientParams, options).then((response) => {
+      if(shdLog) {
+        this.updateInkiruLogs(req, startTs, endpoint, clientParams, logId);
+      }
+      return response;
+    });
   }
 
   callWithInternalUser = (endpoint, clientParams = {}, options = {}) => {
@@ -104,6 +125,102 @@ export class Cluster {
       'log'
     ]);
   }
+
+  setInkiruLogs = async (req = {}, startTs, clientParams = {}, endpoint) => {
+    try {
+      const { query } = req;
+
+      try {
+        await callAPI(this._noAuthClient, 'search', LOGGING_BODY);
+      } catch (errResp) {
+        await callAPI(this._noAuthClient, 'indices.create', LOGGING_MAPPING);
+      }
+
+      const reqBody = [];
+
+      const header = {
+        'index': {
+          '_index': LOGGING_INDEX,
+          '_type': '_doc'
+        }
+      };
+
+      reqBody.push(header);
+
+      if(typeof (endpoint) === 'object') {
+        endpoint = JSON.stringify(endpoint);
+      } else if(typeof (endpoint) !== 'string') {
+        endpoint = endpoint.toString();
+      }
+
+      const body = {
+        create_ts: startTs,
+        start_ts: startTs,
+        end_point: endpoint,
+        query_string: JSON.stringify(query),
+        payloads: JSON.stringify(clientParams)
+      };
+
+      reqBody.push(body);
+
+      return await callAPI(this._noAuthClient, 'bulk', { body: reqBody });
+    } catch (err) {
+      console.log('set inkiru log error : ' + err);
+    }
+
+  }
+
+  updateInkiruLogs = async (req = {}, startTs, endpoint, clientParams = {}, id) => {
+    try {
+      const { query } = req;
+      const endTs = new Date();
+
+      const reqBody = [];
+
+      const header = {
+        'index': {
+          '_index': LOGGING_INDEX,
+          '_type': '_doc',
+          '_id': id
+        }
+      };
+
+      reqBody.push(header);
+
+      if(typeof (endpoint) === 'object') {
+        endpoint = JSON.stringify(endpoint);
+      } else if(typeof (endpoint) !== 'string') {
+        endpoint = endpoint.toString();
+      }
+
+      const body = {
+        create_ts: startTs,
+        start_ts: startTs,
+        end_point: endpoint,
+        end_ts: endTs,
+        duration: endTs - startTs,
+        query_string: JSON.stringify(query),
+        payloads: JSON.stringify(clientParams)
+      };
+
+      reqBody.push(body);
+
+      return await callAPI(this._noAuthClient, 'bulk', { body: reqBody });
+    } catch (err) {
+      console.log('update inkiru log error : ' + err);
+    }
+
+  }
+}
+
+function shouldLog(req, endpoint, clientParams) {
+  const { query, payload } = req;
+
+  return query &&
+        payload &&
+        endpoint &&
+        IGNORE_TYPES.indexOf(endpoint) === -1 &&
+        JSON.stringify(clientParams).indexOf(LOGGING_INDEX) === -1;
 }
 
 function callAPI(client, endpoint, clientParams = {}, options = {}) {
