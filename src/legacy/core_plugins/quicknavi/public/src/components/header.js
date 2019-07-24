@@ -33,6 +33,7 @@ export default class Header extends Component {
           onClose={this.toggleAddDashboardModal}
           dashboards={this.props.dashboards}
           searches={this.props.searches}
+          visualizations={this.props.visualizations}
           users={this.props.users}
           initialize={this.props.initialize}
           onSave={this.props.onAdd}
@@ -48,7 +49,7 @@ export default class Header extends Component {
 
         {this.state.showModal && this.renderModal()}
 
-        <span>Dashboards List</span>
+        <span>Saved Object List</span>
         <button
           type="button"
           className="kuiIcon fa-plus qn_btn_primary"
@@ -64,6 +65,7 @@ Header.props = {
   initialize: PropTypes.function,
   dashboards: PropTypes.arrayOf(PropTypes.object),
   searches: PropTypes.arrayOf(PropTypes.object),
+  visualizations: PropTypes.arrayOf(PropTypes.object),
   users: PropTypes.arrayOf(PropTypes.object),
   ranklist: PropTypes.arrayOf(PropTypes.object),
   onAdd: PropTypes.function

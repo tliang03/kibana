@@ -31,6 +31,7 @@ export default (server) => {
       };
 
       try {
+        req.payload = {};
         resp = await callWithRequest(req, 'search', body);
       } catch (errResp) {
         try {
@@ -70,6 +71,7 @@ export default (server) => {
       };
 
       try {
+        req.payload = {};
         resp = await callWithRequest(req, 'search', body);
       } catch (errResp) {
         error = errResp.response;
@@ -115,6 +117,7 @@ export default (server) => {
       }];
 
       try {
+        req.payload = {};
         resp = await callWithRequest(req, 'bulk', { body: body });
 
       } catch (errResp) {

@@ -11,10 +11,11 @@ import { NoResults } from './no_results';
 import ErrorContainer from './errors';
 
 const mapStateToProps = (state) => {
-  const { dashboards, searches, ranklist, roles, sections, users, error } = state;
+  const { dashboards, searches, visualizations, ranklist, roles, sections, users, error } = state;
   return {
     dashboards: dashboards,
     searches: searches,
+    visualizations: visualizations,
     ranklist: ranklist,
     roles: roles,
     users: users,
@@ -42,6 +43,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     _searchAllSearch: () => {
       return dispatch(actions.searchAllSearch());
+    },
+    _searchAllVisualization: () => {
+      return dispatch(actions.searchAllVisualization());
     },
     _searchAllUsers: () => {
       return dispatch(actions.searchAllUsers());
@@ -73,6 +77,7 @@ class DashboardRank extends Component {
     const promises = [
       this.props._searchAllDashboards(),
       this.props._searchAllSearch(),
+      this.props._searchAllVisualization(),
       this.props._searchAllUsers()
     ];
     return Promise.all(promises);
@@ -97,6 +102,7 @@ class DashboardRank extends Component {
           id={this.props.id}
           initialize={this.initializePopup}
           searches={this.props.searches}
+          visualizations={this.props.visualizations}
           dashboards={this.props.dashboards}
           users={this.props.users}
           ranklist={this.props.ranklist}
@@ -115,6 +121,7 @@ class DashboardRank extends Component {
               initialize={this.initializePopup}
               dashboards={this.props.dashboards}
               searches={this.props.searches}
+              visualizations={this.props.visualizations}
               users={this.props.users}
               ranklist={this.props.ranklist}
               editItem={this.editItem}

@@ -73,3 +73,37 @@ export function searchAllSearch() {
       });
   };
 }
+
+export function searchAllVisualization() {
+  return (dispatch) => {
+    const url = `../api/dashrank/dashboards?index=${conf.index}&type=visualization`;
+    return $.ajax({
+      url: url,
+      type: 'GET'
+    })
+      .then((response) => {
+        const resp = response.resp;
+        const error = response.error;
+
+        if(error) {
+          dispatch({
+            type: 'ERROR_SEARCH',
+            level: 'ERROR',
+            errormsg: error
+          });
+
+        } else if(resp) {
+          dispatch({
+            type: 'SEARCH_ALL_VISUALIZATION',
+            visualizations: resp.hits.hits
+          });
+        }
+      }, (error) => {
+        dispatch({
+          type: 'ERROR_SEARCH',
+          level: 'ERROR',
+          errormsg: error
+        });
+      });
+  };
+}

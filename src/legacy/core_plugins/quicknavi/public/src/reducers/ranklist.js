@@ -20,9 +20,14 @@ const ranklist = (store = [], action) => {
     savedObject = {
       id: resp.saved_object_id,
       title: resp.saved_object_title,
-      link: link + type + '/' + resp.saved_object_id,
       description: resp.saved_object_description
     };
+
+    if(resp.type !== 'visualize') {
+      savedObject.link = link + type + '/' + resp.saved_object_id;
+    } else {
+      savedObject.link = link + type + '/edit/' + resp.saved_object_id;
+    }
   }
 
   switch(action.type) {
@@ -35,7 +40,10 @@ const ranklist = (store = [], action) => {
         savedObject: savedObject,
         tags: resp.tags ? resp.tags.split(',') : [],
         groups: resp.groups ? resp.groups.split(',') : [],
-        members: resp.members ? resp.members.split(',') : []
+        members: resp.members ? resp.members.split(',') : [],
+        tags_str: resp.tags,
+        groups_str: resp.groups,
+        members_str: resp.members
       });
 
       storeCopy.push(item);
@@ -53,7 +61,10 @@ const ranklist = (store = [], action) => {
             savedObject: savedObject,
             tags: resp.tags ? resp.tags.split(',') : [],
             groups: resp.groups ? resp.groups.split(',') : [],
-            members: resp.members ? resp.members.split(',') : []
+            members: resp.members ? resp.members.split(',') : [],
+            tags_str: resp.tags,
+            groups_str: resp.groups,
+            members_str: resp.members
           });
 
           return item;
@@ -84,9 +95,14 @@ const ranklist = (store = [], action) => {
         savedObject = {
           id: row._source.saved_object_id,
           title: row._source.saved_object_title,
-          link: link + type + '/' + row._source.saved_object_id,
           description: row._source.saved_object_description
         };
+
+        if(type !== 'visualize') {
+          savedObject.link = link + type + '/' + row._source.saved_object_id;
+        } else {
+          savedObject.link = link + type + '/edit/' + row._source.saved_object_id;
+        }
 
         _.extend(obj, row._source, {
           id: id,
@@ -94,7 +110,10 @@ const ranklist = (store = [], action) => {
           savedObject: savedObject,
           tags: row._source.tags ? row._source.tags.split(',') : [],
           groups: row._source.groups ? row._source.groups.split(',') : [],
-          members: row._source.members ? row._source.members.split(',') : []
+          members: row._source.members ? row._source.members.split(',') : [],
+          tags_str: row._source.tags,
+          groups_str: row._source.groups,
+          members_str: row._source.members
         });
 
         newStore.push(obj);

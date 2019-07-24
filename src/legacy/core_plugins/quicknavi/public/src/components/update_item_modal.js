@@ -10,7 +10,6 @@ import {
   EuiTextArea,
   EuiForm,
   EuiFormRow,
-  EuiModal,
   EuiModalBody,
   EuiModalFooter,
   EuiModalHeader,
@@ -20,6 +19,7 @@ import {
 } from '@elastic/eui';
 
 import * as Util from '../lib/util';
+import { CustEuiModal } from '../lib/cust_modal/modal';
 
 export default class UpdateItemModal extends Component {
   constructor(props) {
@@ -97,7 +97,13 @@ export default class UpdateItemModal extends Component {
         if(item) {
           item = [item];
         } else {
-          item = [];
+          item = this.props.visualizations.find((vis) => value[0].value === vis.value);
+
+          if(item) {
+            item = [item];
+          } else {
+            item = [];
+          }
         }
       }
     } else if(type === 'groups' || type === 'members' || type === 'tags') {
@@ -201,6 +207,7 @@ export default class UpdateItemModal extends Component {
     if(props.id) {
       selected = this.getSelectedOptionById(props.id, props.dashboards, 'saved_object_id');
       selected = selected.length ? selected : this.getSelectedOptionById(props.id, props.searches, 'saved_object_id');
+      selected = selected.length ? selected : this.getSelectedOptionById(props.id, props.visualizations, 'saved_object_id');
     }
 
     return selected;
@@ -212,6 +219,7 @@ export default class UpdateItemModal extends Component {
     if(props.item) {
       selected = this.getSelectedOption([props.item.savedObject], props.dashboards, 'saved_object_id');
       selected = selected.length ? selected : this.getSelectedOption([props.item.savedObject], props.searches, 'saved_object_id');
+      selected = selected.length ? selected : this.getSelectedOption([props.item.savedObject], props.visualizations, 'saved_object_id');
     }
 
     return selected;
@@ -283,7 +291,7 @@ export default class UpdateItemModal extends Component {
             onCreateOption={(val) => this.handleSelectCreate(val, 'groups')}
           />
         </EuiFormRow>
-        <EuiFormRow label="Dashboard / Discover">
+        <EuiFormRow label="Dashboard / Discover / Visualization">
           <EuiComboBox
             id={htmlId('combo_saved_object')}
             isClearable={false}
@@ -297,6 +305,10 @@ export default class UpdateItemModal extends Component {
               {
                 label: 'Discover',
                 options: this.convertToOptions(this.props.searches)
+              },
+              {
+                label: 'Visualization',
+                options: this.convertToOptions(this.props.visualizations)
               }
             ]}
             selectedOptions={this.convertToOptions(this.state.dashboard)}
@@ -334,10 +346,10 @@ export default class UpdateItemModal extends Component {
 
     const modal = (
       <EuiOverlayMask>
-        <EuiModal onClose={this.props.onClose} className="qn_dashboardmodal">
+        <CustEuiModal onClose={this.props.onClose} className="qn_dashboardmodal">
           <EuiModalHeader>
             <EuiModalHeaderTitle id={htmlId('quicknavi.addDashboardModal.header')}>
-              <span>{this.props.mode} Dashboards / Discover</span>
+              <span>{this.props.mode} Saved Objects</span>
             </EuiModalHeaderTitle>
           </EuiModalHeader>
 
@@ -354,7 +366,7 @@ export default class UpdateItemModal extends Component {
               {this.props.mode}
             </EuiButton>
           </EuiModalFooter>
-        </EuiModal>
+        </CustEuiModal>
       </EuiOverlayMask>
     );
 
@@ -372,6 +384,7 @@ UpdateItemModal.props = {
   onSave: PropTypes.function,
   dashboards: PropTypes.arrayOf(PropTypes.object),
   searches: PropTypes.arrayOf(PropTypes.object),
+  visualizations: PropTypes.arrayOf(PropTypes.object),
   users: PropTypes.arrayOf(PropTypes.object),
   ranklist: PropTypes.arrayOf(PropTypes.object),
   initialize: PropTypes.function,

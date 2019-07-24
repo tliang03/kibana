@@ -1,6 +1,6 @@
 // import { getHeatmapColors } from 'ui/vislib/components/color/heatmap_color';
 
-const DEFUALT_GROUPS = ['GENERAL', 'BUSINESS', 'OG', 'PRODUCT', 'PLATFORM', 'SRM', 'TOOLS', 'WMCOM', 'WMPAY'];
+const DEFUALT_GROUPS = ['ALL', 'ENGINEERING', 'DATA SCIENTISTS', 'BUSINESS', 'PRODUCT', 'OG', 'PLATFORM', 'SRM', 'TOOLS', 'WMCOM', 'WMPAY'];
 
 const DEFAULT_MEMBERS = ['All'];
 

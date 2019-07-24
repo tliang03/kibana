@@ -21,6 +21,10 @@ const TYPE_OPTIONS = [
   {
     value: 'discover',
     label: 'Discover'
+  },
+  {
+    value: 'visualize',
+    label: 'Visualization'
   }
 ];
 
@@ -90,6 +94,7 @@ export default class RankList extends Component {
         onClose={this.toggleModal}
         dashboards={this.props.dashboards}
         searches={this.props.searches}
+        visualizations={this.props.visualizations}
         users={this.props.users}
         initialize={this.props.initialize}
         item={this.state.currentItem}
@@ -121,14 +126,9 @@ export default class RankList extends Component {
 
     const columns = [
       {
-        field: 'groups',
+        field: 'groups_str',
         name: 'Groups',
-        sortable: true,
-        render: (groups) => {
-          return (
-            <div>{groups.join(', ')}</div>
-          );
-        }
+        sortable: true
       },
       {
         field: 'type',
@@ -159,24 +159,20 @@ export default class RankList extends Component {
         sortable: true
       },
       {
-        field: 'members',
+        field: 'members_str',
         name: 'Members',
-        sortable: true,
-        render: (members) => {
-          return (
-            <div>{members.join(', ')}</div>
-          );
-        }
+        sortable: true
       },
       {
-        field: 'tags',
+        field: 'tags_str',
         name: 'Tags',
-        render: (tagArr) => {
+        render: (tagStr) => {
           const that = this;
+          const tags = tagStr.split(',');
           return (
             <div>
               {
-                tagArr.map((tag) => {
+                tags.map((tag) => {
                   return (
                     <EuiBadge key={tag} color={that.getTagColor(tag)}>
                       {tag}
@@ -242,7 +238,7 @@ export default class RankList extends Component {
             name: item.label
           }))
         }
-      ],
+      ]
     };
 
     return (
@@ -264,6 +260,7 @@ RankList.props = {
   initialize: PropTypes.function,
   dashboards: PropTypes.arrayOf(PropTypes.object),
   searches: PropTypes.arrayOf(PropTypes.object),
+  visualizations: PropTypes.arrayOf(PropTypes.object),
   ranklist: PropTypes.arrayOf(PropTypes.object),
   users: PropTypes.arrayOf(PropTypes.object),
   deleteItem: PropTypes.function,

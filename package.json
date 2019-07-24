@@ -429,7 +429,8 @@
     "vinyl-fs": "^3.0.2",
     "xml2js": "^0.4.19",
     "xmlbuilder": "9.0.4",
-    "zlib": "^1.0.5"
+    "zlib": "^1.0.5",
+    "react-focus-lock": "^1.17.7"
   },
   "engines": {
     "node": "10.19.0",
