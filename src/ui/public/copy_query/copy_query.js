@@ -45,7 +45,8 @@ export class CopyQuery extends Component {
 
       if(request && request.stats && Object.keys(request.stats).length) {
         const stats = request.stats;
-        const index = stats['Index pattern'] && stats['Index pattern'].value;
+        const index = (stats['Index pattern'] && stats['Index pattern'].value) ||
+                      (stats.indexPattern && stats.indexPattern.value);
         const body = this.getQueryBody(request.json, props.columns);
 
         query = {
