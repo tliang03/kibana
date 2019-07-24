@@ -143,7 +143,7 @@
       "version": {
         "type": "integer"
       },
-      "intervalRestore": {
+      "dateIntervalRestore": {
         "type": "boolean"
       },
       "dateInterval": {
@@ -152,6 +152,9 @@
             "type": "keyword"
           },
           "value": {
+            "type": "keyword"
+          },
+          "section": {
             "type": "keyword"
           }
         }

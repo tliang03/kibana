@@ -35,7 +35,7 @@ class DashboardSaveModalUi extends React.Component {
     this.state = {
       description: props.description,
       timeRestore: props.timeRestore,
-      intervalRestore: props.intervalRestore,
+      dateIntervalRestore: props.dateIntervalRestore,
     };
   }
 
@@ -45,7 +45,7 @@ class DashboardSaveModalUi extends React.Component {
       newDescription: this.state.description,
       newCopyOnSave,
       newTimeRestore: this.state.timeRestore,
-      newIntervalRestore: this.state.intervalRestore,
+      newDateIntervalRestore: this.state.dateIntervalRestore,
       isTitleDuplicateConfirmed,
       onTitleDuplicate,
     });
@@ -63,9 +63,9 @@ class DashboardSaveModalUi extends React.Component {
     });
   }
 
-  onIntervalRestoreChange = (event) => {
+  onDateIntervalRestoreChange = (event) => {
     this.setState({
-      intervalRestore: event.target.checked,
+      dateIntervalRestore: event.target.checked,
     });
   }
 
@@ -114,8 +114,8 @@ class DashboardSaveModalUi extends React.Component {
           />}
         >
           <EuiSwitch
-            checked={this.state.intervalRestore}
-            onChange={this.onIntervalRestoreChange}
+            checked={this.state.dateIntervalRestore}
+            onChange={this.onDateIntervalRestoreChange}
           />
         </EuiFormRow>
       </Fragment>
@@ -142,7 +142,7 @@ DashboardSaveModalUi.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   timeRestore: PropTypes.bool.isRequired,
-  intervalRestore: PropTypes.bool.isRequired,
+  dateIntervalRestore: PropTypes.bool.isRequired,
   showCopyOnSave: PropTypes.bool.isRequired,
 };
 

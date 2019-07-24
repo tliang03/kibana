@@ -57,11 +57,12 @@ module.factory('SavedDashboard', function (Private, config, i18n) {
         timeRestore: false,
         timeTo: undefined,
         timeFrom: undefined,
-        intervalRestore: false,
+        dateIntervalRestore: false,
         refreshInterval: undefined,
         dateInterval: {
           value: 'auto',
-          display: 'Auto'
+          display: 'Auto',
+          section: null
         }
       },
 
@@ -108,7 +109,7 @@ module.factory('SavedDashboard', function (Private, config, i18n) {
         value: { type: 'keyword' }
       }
     },
-    intervalRestore: 'boolean'
+    dateIntervalRestore: 'boolean'
   };
 
   // Order these fields to the top, the rest are alphabetical

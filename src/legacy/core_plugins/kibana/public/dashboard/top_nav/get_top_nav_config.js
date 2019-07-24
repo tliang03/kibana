@@ -30,24 +30,33 @@ import { TopNavIds } from './top_nav_ids';
  * mode.
  */
 export function getTopNavConfig(dashboardMode, actions, hideWriteControls, model) {
-  switch (dashboardMode) {
+  let options = [];
+
+  switch(dashboardMode) {
+
     case DashboardViewMode.VIEW:
+      options = [
+        getFullScreenConfig(actions[TopNavIds.FULL_SCREEN]),
+        getShareConfig(actions[TopNavIds.SHARE]),
+        getCloneConfig(actions[TopNavIds.CLONE]),
+        getEditConfig(actions[TopNavIds.ENTER_EDIT_MODE]),
+        getDocumentationConfig(actions[TopNavIds.DOCUMENTATION]),
+        getDateInterval(actions[TopNavIds.DATE_INTERVAL], model)
+      ];
+
+      if(model.id) {
+        options.push(getLinkToQuickNavi(actions[TopNavIds.QUICK_NAVI], model));
+      }
+
       return (
         hideWriteControls ?
           [
             getFullScreenConfig(actions[TopNavIds.FULL_SCREEN])
           ]
-          : [
-            getFullScreenConfig(actions[TopNavIds.FULL_SCREEN]),
-            getShareConfig(actions[TopNavIds.SHARE]),
-            getCloneConfig(actions[TopNavIds.CLONE]),
-            getEditConfig(actions[TopNavIds.ENTER_EDIT_MODE]),
-            getDocumentationConfig(actions[TopNavIds.DOCUMENTATION]),
-            getDateInterval(actions[TopNavIds.DATE_INTERVAL], model)
-          ]
+          : options
       );
     case DashboardViewMode.EDIT:
-      return [
+      options = [
         getSaveConfig(actions[TopNavIds.SAVE]),
         getViewConfig(actions[TopNavIds.EXIT_EDIT_MODE]),
         getAddConfig(actions[TopNavIds.ADD]),
@@ -56,6 +65,12 @@ export function getTopNavConfig(dashboardMode, actions, hideWriteControls, model
         getDocumentationConfig(actions[TopNavIds.DOCUMENTATION]),
         getDateInterval(actions[TopNavIds.DATE_INTERVAL], model)
       ];
+
+      if(model.id) {
+        options.push(getLinkToQuickNavi(actions[TopNavIds.QUICK_NAVI], model));
+      }
+
+      return options;
     default:
       return [];
   }
@@ -206,5 +221,15 @@ function getDateInterval(action, model) {
       values: { value: model.dateInterval && model.dateInterval.display },
     }),
     template: '<date-interval-picker select-value="model.dateInterval" on-change="updateDateInterval" />'
+  };
+}
+
+function getLinkToQuickNavi(action) {
+  return {
+    key: 'quickNavi',
+    label: i18n.translate('kbn.dashboard.topNave.optionsConfigDescription', {
+      defaultMessage: 'Quick Navi'
+    }),
+    run: action
   };
 }

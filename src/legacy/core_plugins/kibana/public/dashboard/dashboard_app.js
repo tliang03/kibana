@@ -133,11 +133,12 @@ app.directive('dashboardApp', function ($injector) {
         // Following the "best practice" of always have a '.' in your ng-models –
         // https://github.com/angular/angular.js/wiki/Understanding-Scopes
         $scope.model = {
+          id: $scope.dash.id,
           query: dashboardStateManager.getQuery(),
           timeRestore: dashboardStateManager.getTimeRestore(),
           title: dashboardStateManager.getTitle(),
           description: dashboardStateManager.getDescription(),
-          intervalRestore: dashboardStateManager.getIntervalRestore(),
+          dateIntervalRestore: dashboardStateManager.getDateIntervalRestore(),
           dateInterval: dashboardStateManager.getDateInterval()
         };
         $scope.panels = dashboardStateManager.getPanels();
@@ -383,13 +384,13 @@ app.directive('dashboardApp', function ($injector) {
         const currentTitle = dashboardStateManager.getTitle();
         const currentDescription = dashboardStateManager.getDescription();
         const currentTimeRestore = dashboardStateManager.getTimeRestore();
-        const currentIntervalRestore = dashboardStateManager.getIntervalRestore();
+        const currentDateIntervalRestore = dashboardStateManager.getDateIntervalRestore();
         const onSave = ({
           newTitle,
           newDescription,
           newCopyOnSave,
           newTimeRestore,
-          newIntervalRestore,
+          newDateIntervalRestore,
           isTitleDuplicateConfirmed,
           onTitleDuplicate
         }) => {
@@ -397,7 +398,7 @@ app.directive('dashboardApp', function ($injector) {
           dashboardStateManager.setDescription(newDescription);
           dashboardStateManager.savedDashboard.copyOnSave = newCopyOnSave;
           dashboardStateManager.setTimeRestore(newTimeRestore);
-          dashboardStateManager.setIntervalRestore(newIntervalRestore);
+          dashboardStateManager.setDateIntervalRestore(newDateIntervalRestore);
           const saveOptions = {
             confirmOverwrite: false,
             isTitleDuplicateConfirmed,
@@ -409,7 +410,7 @@ app.directive('dashboardApp', function ($injector) {
               dashboardStateManager.setTitle(currentTitle);
               dashboardStateManager.setDescription(currentDescription);
               dashboardStateManager.setTimeRestore(currentTimeRestore);
-              dashboardStateManager.setIntervalRestore(currentIntervalRestore);
+              dashboardStateManager.setDateIntervalRestore(currentDateIntervalRestore);
             }
             return { id, error };
           });
@@ -422,7 +423,7 @@ app.directive('dashboardApp', function ($injector) {
             title={currentTitle}
             description={currentDescription}
             timeRestore={currentTimeRestore}
-            intervalRestore={currentIntervalRestore}
+            dateIntervalRestore={currentDateIntervalRestore}
             showCopyOnSave={dash.id ? true : false}
           />
         );
@@ -487,6 +488,11 @@ app.directive('dashboardApp', function ($injector) {
           },
           isDirty: dashboardStateManager.getIsDirty(),
         });
+      };
+
+      navActions[TopNavIds.QUICK_NAVI] = () => {
+        const url = location.href.split('kibana')[0] + 'quicknavi?id=' + $scope.dash.id;
+        window.open(url, '_blank');
       };
 
       updateViewMode(dashboardStateManager.getViewMode());

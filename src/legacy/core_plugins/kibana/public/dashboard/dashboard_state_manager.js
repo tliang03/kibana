@@ -400,12 +400,12 @@ export class DashboardStateManager {
     this.saveState();
   }
 
-  getIntervalRestore() {
-    return this.appState.intervalRestore;
+  getDateIntervalRestore() {
+    return this.appState.dateIntervalRestore;
   }
 
-  setIntervalRestore(intervalRestore) {
-    this.appState.intervalRestore = intervalRestore;
+  setDateIntervalRestore(dateIntervalRestore) {
+    this.appState.dateIntervalRestore = dateIntervalRestore;
     this.saveState();
   }
 
@@ -565,7 +565,7 @@ export class DashboardStateManager {
     if (this.savedDashboard.timeRestore && this.getTimeChanged(timeFilter)) {
       changedFilters.push('time range');
     }
-    if (this.savedDashboard.intervalRestore && this.getIntervalChanged()) {
+    if (this.savedDashboard.dateIntervalRestoreintervalRestore && this.getIntervalChanged()) {
       changedFilters.push('date interval');
     }
     return changedFilters;

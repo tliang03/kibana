@@ -24,7 +24,7 @@ export function updateSavedDashboard(savedDashboard, appState, timeFilter, toJso
   savedDashboard.title = appState.title;
   savedDashboard.description = appState.description;
   savedDashboard.timeRestore = appState.timeRestore;
-  savedDashboard.intervalRestore = appState.intervalRestore;
+  savedDashboard.dateIntervalRestore = appState.dateIntervalRestore;
   savedDashboard.panelsJSON = toJson(appState.panels);
   savedDashboard.optionsJSON = toJson(appState.options);
 

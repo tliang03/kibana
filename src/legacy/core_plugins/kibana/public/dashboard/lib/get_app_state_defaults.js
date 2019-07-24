@@ -26,13 +26,13 @@ export function getAppStateDefaults(savedDashboard, hideWriteControls) {
     title: savedDashboard.title,
     description: savedDashboard.description,
     timeRestore: savedDashboard.timeRestore,
-    intervalRestore: savedDashboard.intervalRestore,
+    dateIntervalRestore: savedDashboard.dateIntervalRestore,
     panels: savedDashboard.panelsJSON ? JSON.parse(savedDashboard.panelsJSON) : [],
     options: savedDashboard.optionsJSON ? JSON.parse(savedDashboard.optionsJSON) : {},
     query: FilterUtils.getQueryFilterForDashboard(savedDashboard),
     filters: FilterUtils.getFilterBarsForDashboard(savedDashboard),
     viewMode: savedDashboard.id || hideWriteControls ? DashboardViewMode.VIEW : DashboardViewMode.EDIT,
-    dateInterval: savedDashboard.intervalRestore ? savedDashboard.dateInterval : undefined
+    dateInterval: savedDashboard.dateIntervalRestore ? savedDashboard.dateInterval : undefined
   };
 
   // For BWC in pre 6.1 versions where uiState was stored at the dashboard level, not at the panel level.
