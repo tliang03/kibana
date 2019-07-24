@@ -83,7 +83,8 @@ export async function buildDistributables(options) {
 
   const config = await getConfig({
     isRelease,
-    targetAllPlatforms
+    targetAllPlatforms,
+    targetFileName
   });
 
   const run = createRunner({

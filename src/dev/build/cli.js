@@ -57,7 +57,7 @@ const flags = getopts(process.argv.slice(0), {
     debug: true
   },
   unknown: (flag) => {
-    if(flag !== 'fname'){
+    if(flag !== 'fname') {
       unknownFlags.push(flag);
     }
   }
@@ -109,9 +109,9 @@ const log = new ToolingLog({
 });
 
 function isOsPackageDesired(name) {
-  if (flags['skip-os-packages'] || !flags['all-platforms']) {
-    return false;
-  }
+  // if (flags['skip-os-packages'] || !flags['all-platforms']) {
+  //   return false;
+  // }
 
   // build all if no flags specified
   if (flags.rpm === undefined && flags.deb === undefined && flags.docker === undefined) {

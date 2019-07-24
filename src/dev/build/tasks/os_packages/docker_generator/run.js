@@ -34,7 +34,8 @@ export async function runDockerGenerator(config, log, build) {
   const imageFlavor = build.isOss() ? '-oss' : '';
   const imageTag = 'docker.elastic.co/kibana/kibana';
   const versionTag = config.getBuildVersion();
-  const artifactTarball = `kibana${ imageFlavor }-${ versionTag }-linux-x86_64.tar.gz`;
+  const targetFileName = config.getTargetFileName();
+  const artifactTarball = targetFileName ? targetFileName : `kibana${ imageFlavor }-${ versionTag }-linux-x86_64.tar.gz`;
   const artifactsDir = config.resolveFromTarget('.');
   const dockerBuildDir = config.resolveFromRepo('build', 'kibana-docker', build.isOss() ? 'oss' : 'default');
   const dockerOutputDir = config.resolveFromTarget(`kibana${ imageFlavor }-${ versionTag }-docker.tar.gz`);

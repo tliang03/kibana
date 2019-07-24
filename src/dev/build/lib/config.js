@@ -23,7 +23,7 @@ import { platform as getOsPlatform } from 'os';
 import { getVersionInfo } from './version_info';
 import { createPlatform } from './platform';
 
-export async function getConfig({ isRelease, targetAllPlatforms }) {
+export async function getConfig({ isRelease, targetAllPlatforms, targetFileName }) {
   const pkgPath = resolve(__dirname, '../../../../package.json');
   const pkg = require(pkgPath); // eslint-disable-line import/no-dynamic-require
   const repoRoot = dirname(pkgPath);
@@ -177,6 +177,10 @@ export async function getConfig({ isRelease, targetAllPlatforms }) {
      */
     resolveFromTarget(...subPaths) {
       return resolve(repoRoot, 'target', ...subPaths);
+    }
+
+    getTargetFileName() {
+      return targetFileName;
     }
   }();
 }

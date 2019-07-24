@@ -24,6 +24,7 @@ import { exec } from '../../lib';
 export async function runFpm(config, log, build, type, pkgSpecificFlags) {
   const linux = config.getLinuxPlatform();
   const version = config.getBuildVersion();
+  const targetFileName = config.getTargetFileName();
 
   const resolveWithTrailingSlash = (...paths) => (
     `${resolve(...paths)}/`
@@ -45,6 +46,12 @@ export async function runFpm(config, log, build, type, pkgSpecificFlags) {
     }
   };
 
+  let name = build.isOss() ? 'kibana-oss' : 'kibana';
+
+  if(targetFileName) {
+    name = 'kibana';
+  }
+
   const args = [
     // Force output even if it will overwrite an existing file
     '--force',
@@ -55,15 +62,13 @@ export async function runFpm(config, log, build, type, pkgSpecificFlags) {
     // we force dashes in the version file name because otherwise fpm uses
     // the filtered package version, which would have dashes replaced with
     // underscores
-    '--package', config.resolveFromTarget(`NAME-${version}-ARCH.TYPE`),
+    '--package', config.resolveFromTarget(targetFileName ? `${targetFileName}.TYPE` : `NAME-${version}-ARCH.TYPE`),
 
     // input type
     '-s', 'dir',
 
     // general info about the package
-    '--name', build.isOss()
-      ? 'kibana-oss'
-      : 'kibana',
+    '--name', name,
     '--description', 'Explore\ and\ visualize\ your\ Elasticsearch\ data',
     '--version', version,
     '--url', 'https://www.elastic.co',
