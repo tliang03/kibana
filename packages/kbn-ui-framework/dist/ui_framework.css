@@ -3181,6 +3181,14 @@ main {
   align-items: center;
   height: 100%; }
 
+.kbnCollapsibleSidebar__collapseButton {
+  z-index: 1 !important;;
+}
+
+#discover-sidebar .dscFieldChooserContainer{
+  width: 100%;
+}
+
 .kuiStickyHeader {
   position: fixed;
   top: -52px;

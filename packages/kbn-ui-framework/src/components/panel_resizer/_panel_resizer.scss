@@ -18,3 +18,14 @@
 
   height: 100%;
 }
+
+
+.kbnCollapsibleSidebar__collapseButton {
+  z-index: 1 !important;;
+}
+
+#discover-sidebar {
+  .dscFieldChooserContainer {
+    width: 100%;
+  }
+}
