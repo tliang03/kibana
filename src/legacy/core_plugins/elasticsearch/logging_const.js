@@ -1,7 +1,20 @@
-export const LOGGING_INDEX = 'tools.loogings';
+
+const getSuffix = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+
+  return '-m' + year + month;
+
+};
+
+export const getLoggingIndex = () => {
+  return 'fa-' + 'tools.loggings' + getSuffix();
+};
+
 
 export const LOGGING_BODY = {
-  'index': LOGGING_INDEX,
+  'index': getLoggingIndex(),
   'body': {
     'query': {
       'match_all': {}

@@ -26,7 +26,9 @@ import filterHeaders from './filter_headers';
 import { parseConfig } from './parse_config';
 
 import LOGGING_MAPPING from '../logging_mapping.json';
-import { LOGGING_INDEX, LOGGING_BODY } from '../logging_const';
+import { getLoggingIndex, LOGGING_BODY } from '../logging_const';
+
+LOGGING_MAPPING.index = getLoggingIndex();
 
 const IGNORE_TYPES = ['mget', 'update', 'get'];
 
@@ -140,7 +142,7 @@ export class Cluster {
 
       const header = {
         'index': {
-          '_index': LOGGING_INDEX,
+          '_index': getLoggingIndex(),
           '_type': '_doc'
         }
       };
@@ -179,7 +181,7 @@ export class Cluster {
 
       const header = {
         'index': {
-          '_index': LOGGING_INDEX,
+          '_index': getLoggingIndex(),
           '_type': '_doc',
           '_id': id
         }
@@ -220,7 +222,7 @@ function shouldLog(req, endpoint, clientParams) {
         payload &&
         endpoint &&
         IGNORE_TYPES.indexOf(endpoint) === -1 &&
-        JSON.stringify(clientParams).indexOf(LOGGING_INDEX) === -1;
+        JSON.stringify(clientParams).indexOf(getLoggingIndex()) === -1;
 }
 
 function callAPI(client, endpoint, clientParams = {}, options = {}) {
