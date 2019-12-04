@@ -491,7 +491,7 @@ app.directive('dashboardApp', function ($injector) {
       };
 
       navActions[TopNavIds.QUICK_NAVI] = () => {
-        const url = location.href.split('kibana')[0] + 'quicknavi?id=' + $scope.dash.id;
+        const url = location.origin + '/app/quicknavi?id=' + $scope.dash.id;
         window.open(url, '_blank');
       };
 

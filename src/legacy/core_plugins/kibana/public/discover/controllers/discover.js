@@ -305,7 +305,7 @@ function discoverController(
         defaultMessage: 'Quick Navi'
       }),
       run: () => {
-        const url = location.href.split('kibana')[0] + 'quicknavi?id=' + savedSearch.id;
+        const url =location.origin + '/app/quicknavi?id=' + savedSearch.id;
         window.open(url, '_blank');
       }
     });
