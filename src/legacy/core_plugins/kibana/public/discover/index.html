@@ -46,6 +46,7 @@
         index-patterns="[indexPattern]"
       ></filter-bar>
     </div>
+    <!-- INKIRU ENTRANCE PANEL RESIZER -- START -->
     <div class="row dscContainer">
       <div class="col-md-2 sidebar-container collapsible-sidebar" id="discover-sidebar">
         <disc-field-chooser
@@ -61,11 +62,13 @@
           on-remove-field="removeColumn"
         >
         </disc-field-chooser>
+
         <panel-resizer
           app-name="'discover'"
           panel-el="'#discover-sidebar'"
         />
       </div>
+      <!-- INKIRU ENTRANCE PANEL RESIZER -- END -->
 
       <div class="dscWrapper col-md-10">
         <div class="dscWrapper__content">
@@ -170,6 +173,7 @@
               </div>
             </section>
 
+            <!-- INKIRU ENTRANCE STICKY HEADER (scroll group)-->
             <section
               class="dscTable"
               fixed-scroll

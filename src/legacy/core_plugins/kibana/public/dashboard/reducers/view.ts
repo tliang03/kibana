@@ -21,6 +21,7 @@ import { cloneDeep } from 'lodash';
 import { Reducer } from 'redux';
 import { ViewActions, ViewActionTypeKeys } from '../actions';
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 import { Filters, Query, TimeRange, DateInterval } from 'ui/embeddable';
 import { QueryLanguageType } from 'ui/embeddable/types';
 import { DashboardViewMode } from '../dashboard_view_mode';
@@ -71,6 +72,7 @@ const updateQuery = (view: ViewState, query: Query) => ({
   query,
 });
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 const updateDateInterval = (view: ViewState, dateInterval: DateInterval) => ({
   ...view,
   dateInterval,

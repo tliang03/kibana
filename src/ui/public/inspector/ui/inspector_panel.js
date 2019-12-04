@@ -27,6 +27,7 @@ import {
   EuiTitle,
 } from '@elastic/eui';
 
+// INKIRU ENTRANCE COPY QUERY
 import {
   CopyQuery
 } from 'ui/copy_query';
@@ -87,6 +88,8 @@ class InspectorPanel extends Component {
     const { views, title } = this.props;
     const { selectedView } = this.state;
 
+    // INKIRU ENTRANCE COPY QUERY
+    
     return (
       <React.Fragment>
         <EuiFlyoutHeader hasBorder>

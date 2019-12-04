@@ -21,4 +21,6 @@ export { EmbeddableFactory, OnEmbeddableStateChanged } from './embeddable_factor
 export * from './embeddable';
 export * from './context_menu_actions';
 export { EmbeddableFactoriesRegistryProvider } from './embeddable_factories_registry';
+
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 export { ContainerState, EmbeddableState, Query, DateInterval, Filters, TimeRange } from './types';

@@ -21,6 +21,8 @@ import { SearchSource } from '../../courier';
 import { QueryFilter } from '../../filter_bar/query_filter';
 import { Adapters } from '../../inspector/types';
 import { PersistedState } from '../../persisted_state';
+
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 import { Filters, Query, DateInterval, TimeRange } from '../../visualize';
 import { AggConfigs } from '../agg_configs';
 import { Vis } from '../vis';

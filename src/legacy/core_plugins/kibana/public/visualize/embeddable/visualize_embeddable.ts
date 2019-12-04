@@ -17,6 +17,7 @@
  * under the License.
  */
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 import _ from 'lodash';
 import { ContainerState, Embeddable } from 'ui/embeddable';
 import { OnEmbeddableStateChanged } from 'ui/embeddable/embeddable_factory';

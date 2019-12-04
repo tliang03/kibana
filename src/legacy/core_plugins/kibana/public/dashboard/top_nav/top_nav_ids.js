@@ -17,6 +17,7 @@
  * under the License.
  */
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 export const TopNavIds = {
   ADD: 'add',
   SHARE: 'share',

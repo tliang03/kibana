@@ -28,6 +28,7 @@ import {
   EuiSwitch,
 } from '@elastic/eui';
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 class DashboardSaveModalUi extends React.Component {
   constructor(props) {
     super(props);

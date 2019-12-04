@@ -47,6 +47,8 @@ export interface Query {
 export interface EmbeddableCustomization {
   [key: string]: object | string;
 }
+
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 export interface DateInterval {
   display: string;
   value: string;

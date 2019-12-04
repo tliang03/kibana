@@ -31,9 +31,11 @@ import {
 
 import './timechart';
 
+//INKIRU ENTRANCE PANEL RESIZER -- START
 import {
   KuiPanelResizer
 } from '@kbn/ui-framework/components';
+//INKIRU ENTRANCE PANEL RESIZER -- END
 
 const app = uiModules.get('apps/discover', ['react']);
 
@@ -44,4 +46,6 @@ app.directive(
   reactDirective => reactDirective(wrapInI18nContext(DiscoverUnsupportedIndexPattern), ['unsupportedType'])
 );
 
+//INKIRU ENTRANCE PANEL RESIZER -- START
 app.directive('panelResizer', reactDirective => reactDirective(wrapInI18nContext(KuiPanelResizer)));
+//INKIRU ENTRANCE PANEL RESIZER -- END

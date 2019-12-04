@@ -211,6 +211,7 @@ export class DashboardStateManager {
       store.dispatch(updateQuery(this.getQuery()));
     }
 
+    //INKIRU ENTRANCE DATE INTERVAL SWITCHER
     if (getDateInterval(state) !== this.getDateInterval()) {
       store.dispatch(updateDateInterval(this.getDateInterval()));
     }
@@ -307,6 +308,7 @@ export class DashboardStateManager {
     // Need to make a copy to ensure they are not overwritten.
     this.stateDefaults.filters = [...this.getLastSavedFilterBars()];
 
+    //INKIRU ENTRANCE DATE INTERVAL SWITCHER
     this.stateDefaults.dateInterval = this.lastSavedDashboardFilters.dateInterval;
 
     this.isDirty = false;
@@ -319,6 +321,9 @@ export class DashboardStateManager {
    * Returns an object which contains the current filter state of this.savedDashboard.
    * @returns {{timeTo: String, timeFrom: String, filterBars: Array, query: Object, dateInterval: Object}}
    */
+
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
+
   getFilterState() {
     return {
       timeTo: this.savedDashboard.timeTo,
@@ -359,6 +364,7 @@ export class DashboardStateManager {
     return this.appState.query;
   }
 
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   getDateInterval() {
     return this.appState.dateInterval;
   }
@@ -400,6 +406,7 @@ export class DashboardStateManager {
     this.saveState();
   }
 
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   getDateIntervalRestore() {
     return this.appState.dateIntervalRestore;
   }
@@ -432,6 +439,7 @@ export class DashboardStateManager {
     return this.lastSavedDashboardFilters.query;
   }
 
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   getLastSavedDateInterval() {
     return this.lastSavedDashboardFilters.dateInterval;
   }
@@ -478,6 +486,7 @@ export class DashboardStateManager {
     );
   }
 
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   getIntervalChanged() {
     return !FilterUtils.isDateIntervalEqual(this.appState.dateInterval, this.getLastSavedDateInterval());
   }
@@ -565,6 +574,8 @@ export class DashboardStateManager {
     if (this.savedDashboard.timeRestore && this.getTimeChanged(timeFilter)) {
       changedFilters.push('time range');
     }
+
+    //INKIRU ENTRANCE DATE INTERVAL SWITCHER
     if (this.savedDashboard.dateIntervalRestoreintervalRestore && this.getIntervalChanged()) {
       changedFilters.push('date interval');
     }
@@ -627,6 +638,9 @@ export class DashboardStateManager {
    * Applies the current filter state to the dashboard.
    * @param filter {Array.<Object>} An array of filter bar filters.
    */
+
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
+
   applyFilters(query, filters, dateInterval) {
     this.appState.query = query;
     this.appState.dateInterval = dateInterval;
@@ -650,6 +664,7 @@ export class DashboardStateManager {
     // Query needs to be compared manually because saved legacy queries get migrated in app state automatically
     this.stateMonitor.ignoreProps('query');
 
+    //INKIRU ENTRANCE DATE INTERVAL SWITCHER
     this.stateMonitor.ignoreProps('dateInterval');
 
     this.stateMonitor.onChange(status => {

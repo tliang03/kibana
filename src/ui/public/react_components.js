@@ -39,8 +39,11 @@ const app = uiModules.get('app/kibana', ['react']);
 
 app.directive('toolBarSearchBox', reactDirective => reactDirective(KuiToolBarSearchBox));
 
+
+//INKIRU ENTRANCE STICKY HEADER
 app.directive('stickyHeader', reactDirective => reactDirective(KuiStickyHeader));
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 app.directive('dateIntervalPicker', reactDirective => reactDirective(KuiDateIntervalPicker));
 
 app.directive('confirmModal', reactDirective => reactDirective(EuiConfirmModal));

@@ -291,6 +291,7 @@ function discoverController(
     }),
     testId: 'openInspectorButton',
     run() {
+      //INKIRU ENTRANCE COPY QUERY -- START
       Inspector.open(inspectorAdapters, {
         title: savedSearch.title,
         columns: $scope.state.columns

@@ -17,6 +17,8 @@
  * under the License.
  */
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
+
 import { createAction } from 'redux-actions';
 import { Filters, Query, TimeRange, DateInterval } from 'ui/embeddable';
 import { KibanaAction } from '../../selectors/types';

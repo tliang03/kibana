@@ -112,6 +112,7 @@ export const getFilters = (dashboard: DashboardState): Filters => dashboard.view
 
 export const getQuery = (dashboard: DashboardState): Query => dashboard.view.query;
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 export const getDateInterval = (dashboard: DashboardState): DateInterval => dashboard.view.dateInterval;
 
 export const getMetadata = (dashboard: DashboardState): DashboardMetadata => dashboard.metadata;

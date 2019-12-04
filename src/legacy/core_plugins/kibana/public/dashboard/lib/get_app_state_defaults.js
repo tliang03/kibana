@@ -21,6 +21,8 @@ import { DashboardViewMode } from '../dashboard_view_mode';
 import { FilterUtils } from './filter_utils';
 
 export function getAppStateDefaults(savedDashboard, hideWriteControls) {
+
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   const appState = {
     fullScreenMode: false,
     title: savedDashboard.title,

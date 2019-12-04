@@ -99,6 +99,7 @@ export class FilterUtils {
     return this.convertTimeToUTCString(timeA) === this.convertTimeToUTCString(timeB);
   }
 
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   static isDateIntervalEqual(intervalA, intervalB) {
     return JSON.stringify(intervalA) === JSON.stringify(intervalB);
 

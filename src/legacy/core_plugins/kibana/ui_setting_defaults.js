@@ -17,6 +17,7 @@
  * under the License.
  */
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 import moment from 'moment-timezone';
 import numeralLanguages from '@elastic/numeral/languages';
 import { i18n } from '@kbn/i18n';

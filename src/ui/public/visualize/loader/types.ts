@@ -124,12 +124,14 @@ export interface VisualizeLoaderParams {
    * cycle happens. Default value: `true`
    */
   autoFetch?: boolean;
+
   /**
-  * The appState this visualization should use. If you don't specify it, the
-  * global AppState (that is decoded in the URL) will be used. Usually you don't
-  * need to overwrite this, unless you don't want the visualization to use the
-  * global AppState.
-  */
+    * The appState this visualization should use. If you don't specify it, the
+    * global AppState (that is decoded in the URL) will be used. Usually you don't
+    * need to overwrite this, unless you don't want the visualization to use the
+    * global AppState.
+    * INKIRU ENTRANCE DATE INTERVAL SWITCHER
+    */
   dateInterval?: DateInterval;
 }
 

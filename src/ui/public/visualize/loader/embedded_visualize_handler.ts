@@ -17,6 +17,8 @@
  * under the License.
  */
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
+
 // @ts-ignore untyped dependency
 import { registries } from '@kbn/interpreter/public';
 import { EventEmitter } from 'events';
@@ -233,6 +235,7 @@ export class EmbeddedVisualizeHandler {
   }
 
   /**
+   * INKIRU ENTRANCE DATE INTERVAL SWITCHER
    * Update date interval of the embedded visualization.
    * @param params The parameters that should be updated.
    */

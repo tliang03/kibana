@@ -132,6 +132,10 @@ app.directive('dashboardApp', function ($injector) {
       const updateState = () => {
         // Following the "best practice" of always have a '.' in your ng-models –
         // https://github.com/angular/angular.js/wiki/Understanding-Scopes
+
+
+        //INKIRU ENTRANCE DATE INTERVAL SWITCHER
+
         $scope.model = {
           id: $scope.dash.id,
           query: dashboardStateManager.getQuery(),
@@ -155,6 +159,7 @@ app.directive('dashboardApp', function ($injector) {
         updateState();
       });
 
+      //INKIRU ENTRANCE DATE INTERVAL SWITCHER
       dashboardStateManager.applyFilters(
         dashboardStateManager.getQuery() || {
           query: '',
@@ -235,6 +240,8 @@ app.directive('dashboardApp', function ($injector) {
           dashboardStateManager.requestReload();
         } else {
           $scope.model.query = query;
+
+          //INKIRU ENTRANCE DATE INTERVAL SWITCHER
           dashboardStateManager.applyFilters($scope.model.query, filterBar.getFilters(), $scope.model.dateInterval);
         }
         $scope.refresh();
@@ -262,6 +269,7 @@ app.directive('dashboardApp', function ($injector) {
       });
 
       function updateViewMode(newMode) {
+        //INKIRU ENTRANCE DATE INTERVAL SWITCHER
         $scope.topNavMenu = getTopNavConfig(newMode, navActions, dashboardConfig.getHideWriteControls(), $scope.model); // eslint-disable-line no-use-before-define
         dashboardStateManager.switchViewMode(newMode);
         $scope.dashboardViewMode = newMode;
@@ -385,6 +393,8 @@ app.directive('dashboardApp', function ($injector) {
         const currentDescription = dashboardStateManager.getDescription();
         const currentTimeRestore = dashboardStateManager.getTimeRestore();
         const currentDateIntervalRestore = dashboardStateManager.getDateIntervalRestore();
+
+        //INKIRU ENTRANCE DATE INTERVAL SWITCHER
         const onSave = ({
           newTitle,
           newDescription,
@@ -497,6 +507,7 @@ app.directive('dashboardApp', function ($injector) {
 
       updateViewMode(dashboardStateManager.getViewMode());
 
+      //INKIRU ENTRANCE DATE INTERVAL SWITCHER
       $scope.updateDateInterval = (interval) => {
         $scope.model.dateInterval = interval;
 

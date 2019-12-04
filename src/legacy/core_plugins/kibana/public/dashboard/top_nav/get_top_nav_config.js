@@ -31,10 +31,11 @@ import { TopNavIds } from './top_nav_ids';
  */
 export function getTopNavConfig(dashboardMode, actions, hideWriteControls, model) {
   let options = [];
-
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   switch(dashboardMode) {
 
     case DashboardViewMode.VIEW:
+
       options = [
         getFullScreenConfig(actions[TopNavIds.FULL_SCREEN]),
         getShareConfig(actions[TopNavIds.SHARE]),
@@ -213,6 +214,7 @@ function getDocumentationConfig(action) {
   };
 }
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 function getDateInterval(action, model) {
   return {
     key: 'dateInterval',
@@ -224,6 +226,7 @@ function getDateInterval(action, model) {
   };
 }
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 function getLinkToQuickNavi(action) {
   return {
     key: 'quickNavi',

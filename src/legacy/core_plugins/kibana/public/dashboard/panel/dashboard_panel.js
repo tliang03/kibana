@@ -162,6 +162,7 @@ class DashboardPanelUi extends React.Component {
   }
 }
 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 DashboardPanelUi.propTypes = {
   viewOnlyMode: PropTypes.bool.isRequired,
   onPanelFocused: PropTypes.func,

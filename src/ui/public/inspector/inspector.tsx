@@ -73,6 +73,7 @@ function open(adapters: Adapters, options: InspectorOptions = {}): InspectorSess
       if an inspector can be shown.`);
   }
 
+  // INKIRU ENTRANCE COPY QUERY
   return openFlyout(<InspectorPanel views={views} adapters={adapters} title={options.title} columns={options.columns} />, {
     'data-test-subj': 'inspectorPanel',
     closeButtonAriaLabel: closeButtonLabel,

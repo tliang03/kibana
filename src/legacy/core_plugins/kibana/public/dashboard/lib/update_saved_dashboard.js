@@ -24,6 +24,8 @@ export function updateSavedDashboard(savedDashboard, appState, timeFilter, toJso
   savedDashboard.title = appState.title;
   savedDashboard.description = appState.description;
   savedDashboard.timeRestore = appState.timeRestore;
+
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   savedDashboard.dateIntervalRestore = appState.dateIntervalRestore;
   savedDashboard.panelsJSON = toJson(appState.panels);
   savedDashboard.optionsJSON = toJson(appState.options);
@@ -37,5 +39,6 @@ export function updateSavedDashboard(savedDashboard, appState, timeFilter, toJso
   const timeRestoreObj = _.pick(timeFilter.getRefreshInterval(), ['display', 'pause', 'section', 'value']);
   savedDashboard.refreshInterval = savedDashboard.timeRestore ? timeRestoreObj : undefined;
 
+  //INKIRU ENTRANCE DATE INTERVAL SWITCHER
   savedDashboard.dateInterval = appState.dateInterval;
 }

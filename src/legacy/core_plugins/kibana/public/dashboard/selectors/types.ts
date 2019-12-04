@@ -16,7 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
+ 
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 import { EmbeddableMetadata, Filters, Query, DateInterval, TimeRange } from 'ui/embeddable';
 import { DashboardViewMode } from '../dashboard_view_mode';
 

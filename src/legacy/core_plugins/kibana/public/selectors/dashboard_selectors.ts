@@ -64,6 +64,8 @@ export const getFilters = (state: CoreKibanaState): Filters =>
   DashboardSelectors.getFilters(getDashboard(state));
 export const getQuery = (state: CoreKibanaState): Query =>
   DashboardSelectors.getQuery(getDashboard(state));
+
+//INKIRU ENTRANCE DATE INTERVAL SWITCHER
 export const getDateInterval = (state: CoreKibanaState): DateInterval =>
   DashboardSelectors.getDateInterval(getDashboard(state));
 

@@ -59,6 +59,7 @@ module.factory('SavedDashboard', function (Private, config, i18n) {
         timeFrom: undefined,
         dateIntervalRestore: false,
         refreshInterval: undefined,
+        //INKIRU ENTRANCE DATE INTERVAL SWITCHER
         dateInterval: {
           value: 'auto',
           display: 'Auto',
