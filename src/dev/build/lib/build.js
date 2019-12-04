@@ -43,7 +43,7 @@ export function createBuild({ config, oss, targetFileName }) {
 
     getPlatformArchivePath(platform) {
       const ext = platform.isWindows() ? 'zip' : 'tar.gz';
-      const fname = `${targetFileName}` || `${name}-${config.getBuildVersion()}-${platform.getBuildName()}`;
+      const fname = `${name}-${targetFileName}` || `${name}-${config.getBuildVersion()}-${platform.getBuildName()}`;
 
       return config.resolveFromRepo(
         'target',

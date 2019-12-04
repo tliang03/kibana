@@ -48,9 +48,9 @@ export async function runFpm(config, log, build, type, pkgSpecificFlags) {
 
   let name = build.isOss() ? 'kibana-oss' : 'kibana';
 
-  if(targetFileName) {
-    name = 'kibana';
-  }
+  // if(targetFileName) {
+  //   name = 'kibana';
+  // }
 
   const args = [
     // Force output even if it will overwrite an existing file
@@ -62,7 +62,7 @@ export async function runFpm(config, log, build, type, pkgSpecificFlags) {
     // we force dashes in the version file name because otherwise fpm uses
     // the filtered package version, which would have dashes replaced with
     // underscores
-    '--package', config.resolveFromTarget(targetFileName ? `${targetFileName}.TYPE` : `NAME-${version}-ARCH.TYPE`),
+    '--package', config.resolveFromTarget(targetFileName ? `NAME-${targetFileName}.TYPE` : `NAME-${version}-ARCH.TYPE`),
 
     // input type
     '-s', 'dir',
