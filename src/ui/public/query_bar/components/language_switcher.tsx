@@ -43,6 +43,7 @@ interface State {
 interface Props {
   language: string;
   onSelectLanguage: (newLanguage: string) => void;
+  isEnable: boolean
 }
 
 export class QueryLanguageSwitcher extends Component<Props, State> {
@@ -51,6 +52,10 @@ export class QueryLanguageSwitcher extends Component<Props, State> {
   };
 
   public render() {
+    if (!this.props.isEnable) {
+      return null;
+    }
+
     const button = (
       <EuiButtonEmpty size="xs" onClick={this.togglePopover}>
         <FormattedMessage id="common.ui.queryBar.optionsButtonLabel" defaultMessage="Options" />

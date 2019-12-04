@@ -85,6 +85,7 @@ interface Props {
   isRefreshPaused?: boolean;
   refreshInterval?: number;
   onRefreshChange?: (options: { isPaused: boolean; refreshInterval: number }) => void;
+  isQueryLanguageSwitcherShow?: boolean;
 }
 
 interface State {
@@ -600,6 +601,7 @@ export class QueryBarUI extends Component<Props, State> {
                       <QueryLanguageSwitcher
                         language={this.state.query.language}
                         onSelectLanguage={this.onSelectLanguage}
+                        isEnable={this.props.isQueryLanguageSwitcherShow ? true : false}
                       />
                     </div>
                   </div>

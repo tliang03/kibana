@@ -519,6 +519,8 @@ app.directive('dashboardApp', function ($injector) {
         setLightTheme();
       });
 
+      $scope.isQueryLanguageSwitcherShow = config.get('search:enableAutoQueryLanguage');
+
       function updateTheme() {
         dashboardStateManager.getDarkTheme() ? setDarkTheme() : setLightTheme();
       }

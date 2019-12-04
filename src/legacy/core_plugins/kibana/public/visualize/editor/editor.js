@@ -497,5 +497,7 @@ function VisEditor(
     );
   };
 
+  $scope.isQueryLanguageSwitcherShow = config.get('search:enableAutoQueryLanguage');
+
   init();
 }

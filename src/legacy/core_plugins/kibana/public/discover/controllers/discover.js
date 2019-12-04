@@ -534,6 +534,8 @@ function discoverController(
           $scope.updateQueryAndFetch({ query });
         });
 
+        $scope.isQueryLanguageSwitcherShow = config.get('search:enableAutoQueryLanguage');
+
         $scope.$watchMulti([
           'rows',
           'fetchStatus'

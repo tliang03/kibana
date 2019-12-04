@@ -377,6 +377,13 @@ export function getUiSettingDefaults() {
       value: false,
       category: ['search'],
     },
+    'search:enableAutoQueryLanguage': {
+      name: 'Enable auto query language option on search bar',
+      description: `Our experimental autocomplete and simple syntax features can help you create your queries.
+      Just start typing and you’ll see matches related to your data.`,
+      value: true,
+      category: ['search'],
+    },
     'fields:popularLimit': {
       name: i18n.translate('kbn.advancedSettings.fieldsPopularLimitTitle', {
         defaultMessage: 'Popular fields limit',
